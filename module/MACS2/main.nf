@@ -1,6 +1,6 @@
 process MACS2_CALLPEAK {
     tag "$sample_id"
-    label 'Peak calling with MACS3'
+    label 'Peak_calling_with_MACS3'
     publishDir "${params.output_dir}/macs3_output", mode: 'copy'
 
     conda  "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
@@ -22,7 +22,7 @@ process MACS2_CALLPEAK {
     def control   = controlbam ? "--control $controlbam" : ''
 
     """
-    macs2 \\
+    macs3 \\
         callpeak \\
         --gsize $macs2_gsize \\
         --format BAMPE \\

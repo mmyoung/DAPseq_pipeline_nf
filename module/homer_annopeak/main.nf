@@ -16,7 +16,7 @@ process HOMER_ANNOTATEPEAKS {
 
     script:
     """
-    annotatePeaks.pl \\
+    /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env/bin/annotatePeaks.pl \\
         $peak \\
         $fasta \\
         -gtf $gtf \\
