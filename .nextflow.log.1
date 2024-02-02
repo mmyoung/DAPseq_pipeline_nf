@@ -1,0 +1,128 @@
+Jan-30 11:50:47.772 [main] DEBUG nextflow.cli.Launcher - $> nextflow run ./ -c test/params.config -resume
+Jan-30 11:50:47.856 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Jan-30 11:50:47.876 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/project/zhuzhuzhang/lyang/nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Jan-30 11:50:47.886 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jan-30 11:50:47.887 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jan-30 11:50:47.890 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Jan-30 11:50:47.901 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jan-30 11:50:48.363 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Jan-30 11:50:48.366 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /project/gzy8899/lyang/DAPseq_pipeline_nf/test/params.config
+Jan-30 11:50:48.366 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Jan-30 11:50:48.367 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /project/gzy8899/lyang/DAPseq_pipeline_nf/test/params.config
+Jan-30 11:50:48.380 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jan-30 11:50:48.431 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jan-30 11:50:48.490 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Jan-30 11:50:48.505 [main] INFO  nextflow.cli.CmdRun - Launching `./main.nf` [admiring_mandelbrot] DSL2 - revision: 8cf1151256
+Jan-30 11:50:48.506 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jan-30 11:50:48.506 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jan-30 11:50:48.515 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /project/zhuzhuzhang/lyang/nextflow/secrets/store.json
+Jan-30 11:50:48.518 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@216e9ca3] - activable => nextflow.secret.LocalSecretsProvider@216e9ca3
+Jan-30 11:50:48.562 [main] DEBUG nextflow.Session - Session UUID: 121fd250-099d-4bcd-a0b5-958a100bda89
+Jan-30 11:50:48.562 [main] DEBUG nextflow.Session - Run name: admiring_mandelbrot
+Jan-30 11:50:48.563 [main] DEBUG nextflow.Session - Executor pool size: 64
+Jan-30 11:50:48.569 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jan-30 11:50:48.573 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jan-30 11:50:48.600 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (16:01 CDT)
+  System: Linux 4.18.0-305.57.1.el8_4.x86_64
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 20.0.2-internal-adhoc..src
+  Encoding: UTF-8 (UTF-8)
+  Process: 2525613@midway3-login3.rcc.local [10.50.248.65]
+  CPUs: 64 - Mem: 251.1 GB (1.2 GB) - Swap: 4 GB (0)
+Jan-30 11:50:48.629 [main] DEBUG nextflow.Session - Work-dir: /project/zhuzhuzhang/lyang/nextflow [gpfs]
+Jan-30 11:50:48.629 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /project/gzy8899/lyang/DAPseq_pipeline_nf/bin
+Jan-30 11:50:48.638 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jan-30 11:50:48.646 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jan-30 11:50:48.663 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jan-30 11:50:48.671 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 65; maxThreads: 1000
+Jan-30 11:50:48.748 [main] DEBUG nextflow.Session - Session start
+Jan-30 11:50:48.961 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jan-30 11:50:49.363 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Jan-30 11:50:49.363 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Jan-30 11:50:49.370 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Jan-30 11:50:49.375 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Jan-30 11:50:49.376 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Jan-30 11:50:49.378 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Jan-30 11:50:49.430 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Jan-30 11:50:49.430 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Jan-30 11:50:49.435 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Jan-30 11:50:49.435 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Jan-30 11:50:49.437 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: MEME_MOTIF, HOMER_ANNOTATEPEAKS, MACS2_CALLPEAK
+Jan-30 11:50:49.438 [main] DEBUG nextflow.Session - Igniting dataflow network (4)
+Jan-30 11:50:49.442 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MACS2_CALLPEAK
+Jan-30 11:50:49.442 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > HOMER_ANNOTATEPEAKS
+Jan-30 11:50:49.443 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MEME_MOTIF
+Jan-30 11:50:49.443 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_2c0c750751d3d398: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/MEME_motif/main.nf
+  Script_0c06c311a039d416: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/homer_annopeak/main.nf
+  Script_b2fe30a501db8223: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/MACS2/main.nf
+  Script_e9576e7182307fa2: /project/gzy8899/lyang/DAPseq_pipeline_nf/main.nf
+Jan-30 11:50:49.443 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Jan-30 11:50:49.443 [main] DEBUG nextflow.Session - Session await
+Jan-30 11:50:49.595 [Actor Thread 18] INFO  nextflow.processor.TaskProcessor - [26/6f47cb] Cached process > MACS2_CALLPEAK (sample1)
+Jan-30 11:50:49.595 [Actor Thread 20] INFO  nextflow.processor.TaskProcessor - [3e/21c055] Cached process > MACS2_CALLPEAK (sample2)
+Jan-30 11:50:49.665 [Actor Thread 18] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Jan-30 11:50:49.665 [Actor Thread 18] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<4:1>
+Jan-30 11:50:49.667 [Actor Thread 20] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Jan-30 11:50:49.667 [Actor Thread 20] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<4:1>
+Jan-30 11:50:49.678 [Actor Thread 18] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jan-30 11:50:49.816 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process HOMER_ANNOTATEPEAKS (sample1) > jobId: 15497429; workDir: /project/zhuzhuzhang/lyang/nextflow/86/fd7c71aa4d4dbdb329845ca737e120
+Jan-30 11:50:49.816 [Task submitter] INFO  nextflow.Session - [86/fd7c71] Submitted process > HOMER_ANNOTATEPEAKS (sample1)
+Jan-30 11:50:49.899 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process MEME_MOTIF (sample1) > jobId: 15497430; workDir: /project/zhuzhuzhang/lyang/nextflow/a4/71fe20be99227a8a9d7856a0c3a185
+Jan-30 11:50:49.899 [Task submitter] INFO  nextflow.Session - [a4/71fe20] Submitted process > MEME_MOTIF (sample1)
+Jan-30 11:50:49.988 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process MEME_MOTIF (sample2) > jobId: 15497431; workDir: /project/zhuzhuzhang/lyang/nextflow/91/56aa58a8371fe8b362c317dc2c3d06
+Jan-30 11:50:49.988 [Task submitter] INFO  nextflow.Session - [91/56aa58] Submitted process > MEME_MOTIF (sample2)
+Jan-30 11:50:50.071 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process HOMER_ANNOTATEPEAKS (sample2) > jobId: 15497432; workDir: /project/zhuzhuzhang/lyang/nextflow/e5/2d3f1069c94138cedff8605282a7bb
+Jan-30 11:50:50.071 [Task submitter] INFO  nextflow.Session - [e5/2d3f10] Submitted process > HOMER_ANNOTATEPEAKS (sample2)
+Jan-30 11:51:04.386 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 15497429; id: 3; name: HOMER_ANNOTATEPEAKS (sample1); status: COMPLETED; exit: 127; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/86/fd7c71aa4d4dbdb329845ca737e120 started: 1706637064383; exited: 2024-01-30T17:51:02.28584Z; ]
+Jan-30 11:51:04.390 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=HOMER_ANNOTATEPEAKS (sample1); work-dir=/project/zhuzhuzhang/lyang/nextflow/86/fd7c71aa4d4dbdb329845ca737e120
+  error [nextflow.exception.ProcessFailedException]: Process `HOMER_ANNOTATEPEAKS (sample1)` terminated with an error exit status (127)
+Jan-30 11:51:04.411 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'HOMER_ANNOTATEPEAKS (sample1)'
+
+Caused by:
+  Process `HOMER_ANNOTATEPEAKS (sample1)` terminated with an error exit status (127)
+
+Command executed:
+
+  annotatePeaks.pl \
+      sample1_peaks.narrowPeak \
+      Arabidopsis_thaliana.TAIR10.dna.toplevel.fa \
+      -gtf Arabidopsis_thaliana.TAIR10.57.gtf \
+      -cpu 1 \
+      > sample1.annotatePeaks.txt
+
+Command exit status:
+  127
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 3: annotatePeaks.pl: command not found
+
+Work dir:
+  /project/zhuzhuzhang/lyang/nextflow/86/fd7c71aa4d4dbdb329845ca737e120
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+Jan-30 11:51:04.415 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Process `HOMER_ANNOTATEPEAKS (sample1)` terminated with an error exit status (127)
+Jan-30 11:51:04.425 [main] DEBUG nextflow.Session - Session await > all processes finished
+Jan-30 11:51:04.425 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jan-30 11:51:04.428 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 15497430; id: 4; name: MEME_MOTIF (sample1); status: COMPLETED; exit: 1; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/a4/71fe20be99227a8a9d7856a0c3a185 started: 1706637064426; exited: 2024-01-30T17:51:02.434837Z; ]
+Jan-30 11:51:04.428 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=MEME_MOTIF (sample1); work-dir=/project/zhuzhuzhang/lyang/nextflow/a4/71fe20be99227a8a9d7856a0c3a185
+  error [nextflow.exception.ProcessFailedException]: Process `MEME_MOTIF (sample1)` terminated with an error exit status (1)
+Jan-30 11:51:04.430 [main] WARN  n.processor.TaskPollingMonitor - Killing running tasks (2)
+Jan-30 11:51:04.432 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 15497431; id: 5; name: MEME_MOTIF (sample2); status: COMPLETED; exit: 1; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/91/56aa58a8371fe8b362c317dc2c3d06 started: 1706637064431; exited: 2024-01-30T17:51:02.634323Z; ]
+Jan-30 11:51:04.433 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=MEME_MOTIF (sample2); work-dir=/project/zhuzhuzhang/lyang/nextflow/91/56aa58a8371fe8b362c317dc2c3d06
+  error [nextflow.exception.ProcessFailedException]: Process `MEME_MOTIF (sample2)` terminated with an error exit status (1)
+Jan-30 11:51:04.437 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 15497432; id: 6; name: HOMER_ANNOTATEPEAKS (sample2); status: COMPLETED; exit: 127; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/e5/2d3f1069c94138cedff8605282a7bb started: 1706637064435; exited: 2024-01-30T17:51:02.269254Z; ]
+Jan-30 11:51:04.437 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=HOMER_ANNOTATEPEAKS (sample2); work-dir=/project/zhuzhuzhang/lyang/nextflow/e5/2d3f1069c94138cedff8605282a7bb
+  error [nextflow.exception.ProcessFailedException]: Process `HOMER_ANNOTATEPEAKS (sample2)` terminated with an error exit status (127)
+Jan-30 11:51:04.438 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Jan-30 11:51:04.451 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=4; ignoredCount=0; cachedCount=2; pendingCount=0; submittedCount=0; runningCount=-2; retriesCount=0; abortedCount=2; succeedDuration=0ms; failedDuration=7ms; cachedDuration=4ms;loadCpus=-2; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Jan-30 11:51:04.624 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Jan-30 11:51:04.638 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
