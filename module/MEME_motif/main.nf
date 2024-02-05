@@ -1,10 +1,11 @@
 process MEME_MOTIF {
+    conda '/project/gzy8899/lyang/DAPseq_pipeline_nf/env_requirment.yml'
+
     tag "$sample_id"
     label 'Peak_annotation'
     publishDir "${params.output_dir}/meme_output", mode: 'copy'
 
     // WARN: Version information not provided by tool on CLI. Please update version string below when bumping container versions.
-    conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
 
     input:
     tuple val(sample_id), path(peak)

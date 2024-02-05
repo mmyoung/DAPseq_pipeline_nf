@@ -1,3 +1,2 @@
 sample,ipbam,ctrlbam
-sample1,sample1_sorted.bam,sample2_sorted.bam
-sample2,sample2_sorted.bam,sample1_sorted.bam
+sample1,IP_dedup_Q20_sorted.bam,Input_dedup_Q20_sorted.bam
