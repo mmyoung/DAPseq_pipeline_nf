@@ -12,12 +12,10 @@
 #SBATCH --mail-user=lyang13@uchicago.edu  # Where to send email
 
 cd /project/gzy8899/lyang/DAPseq_pipeline_nf
-conda activate DAPseq_env
-
-macs3 \
-      callpeak \
-      --gsize 1000 \
-      --format BAMPE \
-      --name sample2 \
-      --treatment /project/gzy8899/lyang/DAPseq_pipeline_nf/test/bam_file/sample2_sorted.bam \
-      --control /project/gzy8899/lyang/DAPseq_pipeline_nf/test/bam_file/sample1_sorted.bam
+sample_id=test
+peak=/project/gzy8899/lyang/DAPseq_pipeline_nf/test_out/macs3_output/sample1_peaks.narrowPeak
+fasta=/project/gzy8899/references/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa
+conda init
+source activate DAPseq_env
+#/project/zhuzhuzhang/lyang/software/bedtools2/bin/bedtools getfasta -fi ${fasta} -bed ${peak} -fo ${sample_id}.peak.fasta
+meme ${sample_id}.peak.fasta -dna -o ${sample_id}_meme
