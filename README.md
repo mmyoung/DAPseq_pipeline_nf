@@ -24,6 +24,30 @@ nextflow run ./ -c ./test/params.config
 
 ## Requirements
 ```
-conda environment: DAPseq_env (MACS3 and HOMER installed)
-MEME suite pathway: /project/zhuzhuzhang/lyang/software/meme
+conda environment: DAPseq_env (MACS3 and HOMER and MEME suite installed)
 ```
+## Results 
+```
+test_out/
+├── macs3_output
+│   ├── sample1.annotatePeaks.txt
+│   ├── sample1_peaks.narrowPeak
+│   ├── sample1_peaks.xls
+│   ├── sample1_summits.bed
+│   ├── sample2_peaks.narrowPeak
+│   ├── sample2_peaks.xls
+│   └── sample2_summits.bed
+└── meme_output
+    ├── Arabidopsis_thaliana.TAIR10.dna.toplevel.fa.fai
+    ├── sample1_meme
+    │   ├── logo1.eps
+    │   ├── logo1.png
+    │   ├── logo_rc1.eps
+    │   ├── logo_rc1.png
+    │   ├── meme.html
+    │   ├── meme.txt
+    │   └── meme.xml
+    └── sample1.peak.fasta
+```
+
+
