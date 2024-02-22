@@ -1,7 +1,7 @@
 process MEME_MOTIF {
     conda '/project/gzy8899/lyang/DAPseq_pipeline_nf/env_requirment.yml'
 
-    tag "$sample_id"
+    tag "MEME motif analysis"
     label 'Peak_annotation'
     publishDir "${params.output_dir}/meme_output", mode: 'copy'
 
