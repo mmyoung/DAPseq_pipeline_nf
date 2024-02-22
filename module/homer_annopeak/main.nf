@@ -1,5 +1,5 @@
 process HOMER_ANNOTATEPEAKS {
-    tag "$sample_id"
+    tag "Homer peak annotation"
     label 'Peak_annotation'
     publishDir "${params.output_dir}/macs3_output", mode: 'copy'
 

@@ -1,0 +1,114 @@
+Feb-20 16:03:58.057 [main] DEBUG nextflow.cli.Launcher - $> nextflow run ./ -params-file ./test/params.yml
+Feb-20 16:03:58.148 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Feb-20 16:03:58.167 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/project/zhuzhuzhang/lyang/nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Feb-20 16:03:58.176 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Feb-20 16:03:58.177 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Feb-20 16:03:58.179 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Feb-20 16:03:58.186 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Feb-20 16:03:58.653 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Feb-20 16:03:58.654 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Feb-20 16:03:58.696 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Feb-20 16:03:58.752 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Feb-20 16:03:58.764 [main] INFO  nextflow.cli.CmdRun - Launching `./main.nf` [marvelous_ekeblad] DSL2 - revision: a35c163d01
+Feb-20 16:03:58.764 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Feb-20 16:03:58.764 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Feb-20 16:03:58.772 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /project/zhuzhuzhang/lyang/nextflow/secrets/store.json
+Feb-20 16:03:58.774 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@1b5a1d85] - activable => nextflow.secret.LocalSecretsProvider@1b5a1d85
+Feb-20 16:03:58.816 [main] DEBUG nextflow.Session - Session UUID: be57e3bd-cc37-4291-97b5-0948692b0f71
+Feb-20 16:03:58.817 [main] DEBUG nextflow.Session - Run name: marvelous_ekeblad
+Feb-20 16:03:58.817 [main] DEBUG nextflow.Session - Executor pool size: 64
+Feb-20 16:03:58.823 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Feb-20 16:03:58.827 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Feb-20 16:03:58.852 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (16:01 CDT)
+  System: Linux 4.18.0-305.57.1.el8_4.x86_64
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 20.0.2-internal-adhoc..src
+  Encoding: UTF-8 (UTF-8)
+  Process: 2366429@midway3-login4.rcc.local [10.50.248.66]
+  CPUs: 64 - Mem: 251.1 GB (15.7 GB) - Swap: 4 GB (0)
+Feb-20 16:03:58.873 [main] DEBUG nextflow.Session - Work-dir: /project/zhuzhuzhang/lyang/nextflow [gpfs]
+Feb-20 16:03:58.890 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Feb-20 16:03:58.897 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Feb-20 16:03:58.914 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Feb-20 16:03:58.922 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 65; maxThreads: 1000
+Feb-20 16:03:58.984 [main] DEBUG nextflow.Session - Session start
+Feb-20 16:03:59.185 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Feb-20 16:03:59.959 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Feb-20 16:03:59.959 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Feb-20 16:03:59.968 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Feb-20 16:03:59.975 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Feb-20 16:03:59.977 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Feb-20 16:03:59.978 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Feb-20 16:04:00.034 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Feb-20 16:04:00.034 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Feb-20 16:04:00.041 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Feb-20 16:04:00.041 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Feb-20 16:04:00.047 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Feb-20 16:04:00.047 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Feb-20 16:04:00.051 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Feb-20 16:04:00.051 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Feb-20 16:04:00.055 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Feb-20 16:04:00.055 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Feb-20 16:04:00.058 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_b2fe30a501db8223: /project/gzy8899/lyang/DAPseq_pipeline_nf/./subworkflow/../module/MACS2/main.nf
+  Script_2eac843ada084a3d: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Bowtie2Mapping/main.nf
+  Script_6f7a3d49712449d5: /project/gzy8899/lyang/DAPseq_pipeline_nf/./subworkflow/input_check.nf
+  Script_93a98b6457675c12: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/CoverageCal/main.nf
+  Script_0ed809791a062141: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/markduplicates/main.nf
+  Script_618732332433a97a: /project/gzy8899/lyang/DAPseq_pipeline_nf/main.nf
+  Script_f08d64799dcfff73: /project/gzy8899/lyang/DAPseq_pipeline_nf/./subworkflow/call_peak.nf
+  Script_d623ac377a4fd168: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/homer_annopeak/main.nf
+  Script_142ca7def7eb1bb7: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Trimgalore/main.nf
+  Script_c4f74b918f1547f6: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Bam2bw/main.nf
+  Script_ee7cb0b02c2f59c3: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/MEME_motif/main.nf
+  Script_8c6bca4b88bddb72: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Fastqc/main.nf
+Feb-20 16:04:00.058 [main] DEBUG nextflow.Session - Session aborted -- Cause: Workflow `PEAK_ANALYZE` declares 1 input channels but 2 were given
+Feb-20 16:04:00.071 [main] DEBUG nextflow.Session - The following nodes are still active:
+  [operator] ifEmpty
+  [operator] splitCsv
+  [operator] ifEmpty
+  [operator] splitCsv
+  [operator] map
+
+Feb-20 16:04:00.075 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Feb-20 16:04:00.076 [main] ERROR nextflow.cli.Launcher - Workflow `PEAK_ANALYZE` declares 1 input channels but 2 were given
+java.lang.IllegalArgumentException: Workflow `PEAK_ANALYZE` declares 1 input channels but 2 were given
+	at nextflow.script.WorkflowDef.collectInputs(WorkflowDef.groovy:130)
+	at nextflow.script.WorkflowDef.run0(WorkflowDef.groovy:199)
+	at nextflow.script.WorkflowDef.run(WorkflowDef.groovy:188)
+	at nextflow.script.BindableDef.invoke_a(BindableDef.groovy:51)
+	at nextflow.script.ComponentDef.invoke_o(ComponentDef.groovy:40)
+	at nextflow.script.WorkflowBinding.invokeMethod(WorkflowBinding.groovy:102)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeOnDelegationObjects(ClosureMetaClass.java:408)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:350)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:61)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:194)
+	at Script_618732332433a97a$_runScript_closure1$_closure2.doCall(Script_618732332433a97a:57)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1030)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at groovy.lang.Closure.call(Closure.java:406)
+	at nextflow.script.WorkflowDef.run0(WorkflowDef.groovy:204)
+	at nextflow.script.WorkflowDef.run(WorkflowDef.groovy:188)
+	at nextflow.script.BindableDef.invoke_a(BindableDef.groovy:51)
+	at nextflow.script.ChainableDef$invoke_a.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:183)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:236)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:242)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:137)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:372)
+	at nextflow.cli.Launcher.run(Launcher.groovy:500)
+	at nextflow.cli.Launcher.main(Launcher.groovy:672)
+Feb-20 16:04:00.079 [Actor Thread 6] DEBUG nextflow.Nextflow - Ignoring exit because execution is already aborted -- message=sample sheet not found
+Feb-20 16:04:00.079 [Actor Thread 8] DEBUG nextflow.Nextflow - Ignoring exit because execution is already aborted -- message=bam sheet not found

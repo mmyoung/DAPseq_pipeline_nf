@@ -1,0 +1,3 @@
+sample,fq1,fq2,single_end,control
+IP,SRR27496336_1.fastq,SRR27496336_2.fastq,0,Input
+Input,SRR27496337_1.fastq,SRR27496337_2.fastq,0,
