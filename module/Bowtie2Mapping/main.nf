@@ -6,8 +6,9 @@ process BOWTIE2MAP {
         tuple val(meta), path(reads)
 
     output:
-        tuple val(meta), path("*map_sorted.bam"), emit: bam
+        tuple val(meta), path("*_Q20_sorted.bam"), emit: bam
         tuple val(meta), path("*.log"), emit: log
+        tuple val(meta), path("*_Q20_sorted.bam.bai"), emit: bai
 
     script:
 
@@ -26,7 +27,11 @@ process BOWTIE2MAP {
     $reads_args \\
     --threads $task.cpus \\
     2> ${prefix}.bowtie2.log \\
-    | samtools view -bS | samtools sort - > ${prefix}_map_sorted.bam
-    
+    | samtools view -bS - > ${prefix}_map_sorted.bam
+
+    samtools view -bq 20  ${prefix}_map_sorted.bam | samtools sort - > ${prefix}_Q20_sorted.bam
+
+    samtools index ${prefix}_Q20_sorted.bam    
+
     """
 }
