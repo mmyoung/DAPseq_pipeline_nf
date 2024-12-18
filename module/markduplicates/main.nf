@@ -14,12 +14,12 @@ process MARK_DUPLICATES {
     """
     module load samtools/1.13
 
-    java -jar /project/gzy8899/softwares/picard.jar \\
+    java -Xmx20g -jar /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env/share/picard-2.18.23-0/picard.jar \\
         MarkDuplicates \\
-        --INPUT $bam_file \\
-        --OUTPUT ${meta.id}_dedup.bam \\
-        --METRICS_FILE ${meta.id}.MarkDuplicates.metrics.txt \\
-        --REMOVE_DUPLICATES
+        I=$bam_file \\
+        O=${meta.id}_dedup.bam \\
+        M=${meta.id}.MarkDuplicates.metrics.txt \\
+        REMOVE_DUPLICATES=true
         
     samtools view -bq 20  ${meta.id}_dedup.bam | samtools sort - > ${meta.id}_dedup_Q20_sorted.bam
 

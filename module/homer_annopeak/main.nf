@@ -15,12 +15,24 @@ process HOMER_ANNOTATEPEAKS {
     tuple val(sample_id), path("*annotatePeaks.txt"), emit: txt
 
     script:
+
     """
-    /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env/bin/annotatePeaks.pl \\
-        $peak \\
-        $fasta \\
-        -gtf $gtf \\
-        -cpu $task.cpus \\
-        > ${sample_id}.annotatePeaks.txt
+
+    if [ $gtf == "*.gtf" ]
+    then
+        /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env/bin/annotatePeaks.pl \\
+            $peak \\
+            $fasta \\
+            -gtf $gtf \\
+            -cpu $task.cpus \\
+            > ${sample_id}.annotatePeaks.txt
+    else
+        /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env/bin/annotatePeaks.pl \\
+            $peak \\
+            $fasta \\
+            -gff $gtf \\
+            -cpu $task.cpus \\
+            > ${sample_id}.annotatePeaks.txt
+    fi
     """
 }

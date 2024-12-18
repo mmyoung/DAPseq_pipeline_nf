@@ -11,7 +11,7 @@ process MACS2_CALLPEAK {
     val   macs2_gsize
 
     output:
-    tuple val(meta.id), path("*.{narrowPeak,broadPeak}"), emit: peak
+    tuple val(meta.id), path("*.narrowPeak"), emit: peak
     tuple val(meta.id), path("*.xls")                   , emit: xls
 
     tuple val(meta.id), path("*.gappedPeak"), optional:true, emit: gapped
@@ -19,9 +19,11 @@ process MACS2_CALLPEAK {
     tuple val(meta.id), path("*.bdg")       , optional:true, emit: bdg
 
     script:
-    def control   = controlbam ? "--control $controlbam" : ''
+    // def control = (controlbam == "*.bam.bai") ? '' : "--control $controlbam"
+    // when all samples don't have input data
+    def control = ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def format    = meta.single_end ? 'BAM' : 'BAMPE'
+    def format = meta.single_end ? 'BAM' : 'BAMPE'
 
     """
     macs3 \\
