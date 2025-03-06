@@ -10,6 +10,7 @@ A workflow for DAP-seq peak calling and related analysis.
 
 ## Test the workflow
 ```
+git clone git@github.com:mmyoung/DAPseq_pipeline_nf.git
 nextflow run /path/to/DAPseq_pipeline_nf -params-file params.yml ## yml file saving all parameters
 ```
 
