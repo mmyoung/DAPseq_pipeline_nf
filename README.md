@@ -1,6 +1,5 @@
 # DAPseq_pipeline_nf
 A workflow for DAP-seq peak calling and related analysis.
-This workflow could be used in line with the TrimAndMapping pipeline where .bam files are produced.
 
 ## The workflow includes the following steps:
 1. Reads trimming (trim_galore)
