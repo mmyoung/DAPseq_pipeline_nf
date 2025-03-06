@@ -11,7 +11,7 @@ This workflow could be used in line with the TrimAndMapping pipeline where .bam 
 
 ## Test the workflow
 ```
-nextflow run ./ -params-file params.yml
+nextflow run /path/to/DAPseq_pipeline_nf -params-file params.yml ## yml file saving all parameters
 ```
 
 ## Parameters
