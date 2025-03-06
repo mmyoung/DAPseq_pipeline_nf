@@ -3,6 +3,8 @@ A workflow for DAP-seq peak calling and related analysis.
 This workflow could be used in line with the TrimAndMapping pipeline where .bam files are produced.
 
 ## The workflow includes the following steps:
+1. Reads trimming (trim_galore)
+2. Clean reads mapping (bowtie2)
 1. Peak calling (MACS3)
 2. Motif analysis (MEME Suite)
 3. Peak annotation (HOMER)
@@ -14,13 +16,13 @@ nextflow run ./ -params-file params.yml
 
 ## Parameters
 ```
---sample_sheet A tab-delimited file storing the samples information, with five columns: sample,fq1,fq2,single_end,control
+--fq_sheet A tab-delimited file storing the samples information, with five columns: sample,fq1,fq2,single_end,control
 --fasta    Genome fasta file for the analyzing species.
 --gtf    Genome gtf file for the analyzing species.
 --output_dir    Name for directory for saving the results. Default: ./results
 --fq_dir  The folder where the raw .fastq files are.
 --gsize The size of analyzing genome.
---bowtie_idx The bowtei2 index directory.
+--bowtie_idx The bowtei2 index directory. ## built with bowtie2-build command
 --prime5_trim_len How many bases to trim for the 5' of reads.
 --prime3_trim_len How many bases to trim for the 3' of reads.
 --gsize The size of analyzing genome.

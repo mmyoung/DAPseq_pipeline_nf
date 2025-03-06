@@ -1,0 +1,213 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: SRR27496337_2.fastq
+Trimming mode: paired-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.5
+Number of cores used for trimming: 1
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Using Illumina adapter for trimming (count: 163991). Second best hit was Nextera (count: 18)
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; auto-detected)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length for both reads before a sequence pair gets removed: 20 bp
+All Read 1 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 5' end to avoid poor qualities or biases (e.g. M-bias for BS-Seq applications)
+All Read 1 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+All Read 2 sequences will be trimmed by 10 bp from their 3' end to avoid poor qualities or biases
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.5 with Python 3.10.13
+Command line parameters: -j 1 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC SRR27496337_2.fastq
+Processing single-end reads on 1 core ...
+Finished in 158.022 s (47.616 µs/read; 1.26 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:               3,318,713
+Reads with adapters:                 1,857,207 (56.0%)
+Reads written (passing filters):     3,318,713 (100.0%)
+
+Total basepairs processed:   501,125,663 bp
+Quality-trimmed:                 793,358 bp (0.2%)
+Total written (filtered):    481,739,607 bp (96.1%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 1857207 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 33.5%
+  C: 18.7%
+  G: 18.8%
+  T: 29.0%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	780636	829678.2	0	780636
+2	157830	207419.6	0	157830
+3	90342	51854.9	0	90342
+4	46253	12963.7	0	46253
+5	32827	3240.9	0	32827
+6	27716	810.2	0	27716
+7	27345	202.6	0	27345
+8	31896	50.6	0	31896
+9	24989	12.7	0	24932 57
+10	27170	3.2	1	25993 1177
+11	26569	0.8	1	25264 1305
+12	28832	0.2	1	27501 1331
+13	26243	0.0	1	25153 1090
+14	27069	0.0	1	25678 1391
+15	24677	0.0	1	23431 1246
+16	25449	0.0	1	24338 1111
+17	27475	0.0	1	26155 1320
+18	19392	0.0	1	18543 849
+19	26108	0.0	1	24808 1300
+20	23494	0.0	1	22487 1007
+21	18100	0.0	1	17376 724
+22	20721	0.0	1	20000 721
+23	20278	0.0	1	19413 865
+24	21341	0.0	1	20389 952
+25	20950	0.0	1	20170 780
+26	16638	0.0	1	16032 606
+27	15209	0.0	1	14530 679
+28	17220	0.0	1	16634 586
+29	15247	0.0	1	14655 592
+30	14280	0.0	1	13800 480
+31	14396	0.0	1	13873 523
+32	12129	0.0	1	11727 402
+33	12952	0.0	1	12445 507
+34	13951	0.0	1	13458 493
+35	8864	0.0	1	8611 253
+36	9695	0.0	1	9341 354
+37	11160	0.0	1	10766 394
+38	6984	0.0	1	6750 234
+39	8174	0.0	1	7884 290
+40	6907	0.0	1	6711 196
+41	6660	0.0	1	6444 216
+42	6374	0.0	1	6148 226
+43	5210	0.0	1	5044 166
+44	5207	0.0	1	5039 168
+45	5208	0.0	1	5034 174
+46	3694	0.0	1	3576 118
+47	3161	0.0	1	3080 81
+48	3424	0.0	1	3289 135
+49	2909	0.0	1	2823 86
+50	2389	0.0	1	2311 78
+51	3057	0.0	1	2936 121
+52	1996	0.0	1	1940 56
+53	1710	0.0	1	1649 61
+54	1499	0.0	1	1448 51
+55	1310	0.0	1	1269 41
+56	1255	0.0	1	1221 34
+57	1011	0.0	1	975 36
+58	969	0.0	1	938 31
+59	911	0.0	1	881 30
+60	856	0.0	1	819 37
+61	1046	0.0	1	1025 21
+62	770	0.0	1	749 21
+63	448	0.0	1	436 12
+64	170	0.0	1	159 11
+65	286	0.0	1	277 9
+66	398	0.0	1	380 18
+67	343	0.0	1	321 22
+68	329	0.0	1	313 16
+69	312	0.0	1	302 10
+70	239	0.0	1	229 10
+71	277	0.0	1	265 12
+72	256	0.0	1	235 21
+73	240	0.0	1	228 12
+74	230	0.0	1	211 19
+75	230	0.0	1	221 9
+76	179	0.0	1	172 7
+77	173	0.0	1	164 9
+78	164	0.0	1	158 6
+79	167	0.0	1	163 4
+80	167	0.0	1	156 11
+81	147	0.0	1	132 15
+82	132	0.0	1	124 8
+83	160	0.0	1	150 10
+84	137	0.0	1	134 3
+85	172	0.0	1	164 8
+86	148	0.0	1	131 17
+87	153	0.0	1	139 14
+88	127	0.0	1	118 9
+89	144	0.0	1	132 12
+90	164	0.0	1	149 15
+91	126	0.0	1	118 8
+92	135	0.0	1	123 12
+93	147	0.0	1	138 9
+94	108	0.0	1	99 9
+95	123	0.0	1	115 8
+96	105	0.0	1	95 10
+97	110	0.0	1	105 5
+98	112	0.0	1	105 7
+99	113	0.0	1	110 3
+100	93	0.0	1	92 1
+101	113	0.0	1	106 7
+102	102	0.0	1	97 5
+103	108	0.0	1	96 12
+104	103	0.0	1	96 7
+105	65	0.0	1	59 6
+106	96	0.0	1	84 12
+107	102	0.0	1	91 11
+108	85	0.0	1	73 12
+109	75	0.0	1	69 6
+110	71	0.0	1	58 13
+111	69	0.0	1	61 8
+112	56	0.0	1	44 12
+113	48	0.0	1	41 7
+114	53	0.0	1	50 3
+115	39	0.0	1	35 4
+116	55	0.0	1	50 5
+117	40	0.0	1	36 4
+118	35	0.0	1	29 6
+119	25	0.0	1	24 1
+120	41	0.0	1	36 5
+121	22	0.0	1	19 3
+122	24	0.0	1	22 2
+123	36	0.0	1	29 7
+124	25	0.0	1	14 11
+125	26	0.0	1	22 4
+126	16	0.0	1	14 2
+127	22	0.0	1	15 7
+128	20	0.0	1	14 6
+129	15	0.0	1	10 5
+130	18	0.0	1	8 10
+131	14	0.0	1	8 6
+132	14	0.0	1	6 8
+133	4	0.0	1	2 2
+134	11	0.0	1	6 5
+135	9	0.0	1	6 3
+136	7	0.0	1	2 5
+137	7	0.0	1	4 3
+138	16	0.0	1	10 6
+139	9	0.0	1	2 7
+140	8	0.0	1	2 6
+141	13	0.0	1	7 6
+142	7	0.0	1	5 2
+143	7	0.0	1	4 3
+144	2	0.0	1	1 1
+145	5	0.0	1	2 3
+146	18	0.0	1	10 8
+147	8	0.0	1	5 3
+148	10	0.0	1	5 5
+149	11	0.0	1	5 6
+150	9	0.0	1	5 4
+151	15	0.0	1	9 6
+
+RUN STATISTICS FOR INPUT FILE: SRR27496337_2.fastq
+=============================================
+3318713 sequences processed in total
+
+Total number of sequences analysed for the sequence pair length validation: 3318713
+
+Number of sequence pairs removed because at least one read was shorter than the length cutoff (20 bp): 3158 (0.10%)

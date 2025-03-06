@@ -1,6 +1,6 @@
 nextflow.enable.dsl=2
 
-params.help = false
+//params.help = false
 params.threads = 1
 params.output_dir = './results'
 
@@ -40,7 +40,7 @@ include {MACS2_CALLPEAK} from "./module/MACS2"
 
 include {HOMER_ANNOTATEPEAKS} from "./module/homer_annopeak"
 include {MEME_MOTIF} from "./module/MEME_motif"
-
+include {CAL_FRIP} from "./module/calculate_FRiP"
 
 
 workflow {
@@ -49,35 +49,48 @@ workflow {
     
     TRIMGALORE(INPUT_CHECK.out.reads)
     BOWTIE2MAP(TRIMGALORE.out.reads)
-    MARK_DUPLICATES(BOWTIE2MAP.out.bam)
+//  MARK_DUPLICATES(BOWTIE2MAP.out.bam)
     
     FASTQC(TRIMGALORE.out.reads)
-    MARK_DUPLICATES
+//  MARK_DUPLICATES
+    BOWTIE2MAP
         .out
         .bam
-        .join(MARK_DUPLICATES.out.bai, by: [0])
+//      .join(MARK_DUPLICATES.out.bai, by: [0])
+        .join(BOWTIE2MAP.out.bai, by: [0])
         .set {ch_genome_bam_bai}
 
-    ch_genome_bam_bai|(BAM2BW & COVERAGE)
+//    ch_genome_bam_bai|(BAM2BW & COVERAGE)
+
+    BAM2BW(ch_genome_bam_bai)
+    COVERAGE(ch_genome_bam_bai)
 
     ch_genome_bam_bai
         .combine(ch_genome_bam_bai)
         .map { 
             meta1, bam1, bai1, meta2, bam2, bai2 ->
-                meta1.control == meta2.id ? [ meta1, [ bam1, bam2 ], [ bai1, bai2 ] ] : null
+                meta1.control == meta2.id ? [ meta1, [ bam1, bam2 ], [ bai1, bai2 ] ] : [ meta1, [ bam1, null ], [ bai1, null ] ] 
         }
         .set { ch_ip_control_bam_bai }
 
-    ch_ip_control_bam_bai
-    .map { 
-        meta, bams, bais -> 
-            [ meta , bams[0], bams[1] ] 
-    }
-    .set { ch_ip_control_bam }
+//    ch_genome_bam_bai.view()
 
+    ch_genome_bam_bai
+        .map { 
+            meta, bam, bai -> 
+                [ meta , bam, bai ] 
+        }
+        .set { ch_ip_control_bam }
+
+//    ch_ip_control_bam.view()
+
+// call peaks with macs
     MACS2_CALLPEAK(ch_ip_control_bam, params.gsize)
-
+// calculate FRiP score based on the peak coverage 
+    CAL_FRIP(MACS2_CALLPEAK.out.peak,BOWTIE2MAP.out.bam)
+// annotate peak distribution using HOMER
     HOMER_ANNOTATEPEAKS(MACS2_CALLPEAK.out.peak, params.fasta, params.gtf)
+// analyze motif of peaks using MEME suite
     MEME_MOTIF(MACS2_CALLPEAK.out.peak, params.fasta)
     
 }

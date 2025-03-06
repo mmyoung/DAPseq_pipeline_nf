@@ -1,0 +1,24 @@
+2024-09-29 22:10:16	-	evil_cantor	-	4ba35177c27a70e790180d2ecfb3bccd	1ad68fbc-34a4-4c07-a60d-07d7ec95091a	nextflow run ../ -params-file params.yml
+2024-09-29 22:13:23	-	compassionate_hodgkin	-	4ba35177c27a70e790180d2ecfb3bccd	431616ea-0d78-4c71-bda2-671bfe8384ca	nextflow run ../ -params-file params.yml
+2024-09-29 22:14:01	-	naughty_church	-	4ba35177c27a70e790180d2ecfb3bccd	b5814317-9e80-4e8f-bc18-bf7c21265f18	nextflow run ../ -params-file params.yml
+2024-09-29 22:17:52	-	grave_stone	-	4ba35177c27a70e790180d2ecfb3bccd	f3cd3798-d866-4c0b-bdb7-1a3b5adbf4c1	nextflow run ../ -params-file params.yml
+2024-09-29 22:18:34	-	loving_hypatia	-	4ba35177c27a70e790180d2ecfb3bccd	b5d3d271-613c-441d-bf80-b80ece468c7e	nextflow run ../ -params-file params.yml
+2024-09-29 22:20:23	23m 29s	festering_khorana	ERR	4ba35177c27a70e790180d2ecfb3bccd	53152c8f-c4b6-48c2-b19d-fe0f2cef2841	nextflow run ../ -params-file params.yml
+2024-09-30 11:54:35	33m 52s	cheesy_spence	ERR	4ba35177c27a70e790180d2ecfb3bccd	a757d077-870e-4bfb-86a3-d373a3f5bf19	nextflow run ../ -params-file params.yml
+2024-09-30 13:24:51	34m 22s	jolly_magritte	OK	c7f59f9681fc401df8c4738f43561f92	a757d077-870e-4bfb-86a3-d373a3f5bf19	nextflow run ../ -params-file params.yml -resume
+2024-09-30 20:59:20	-	furious_goldwasser	-	315eb5fe395cb2119c40c2699ee2ac87	a757d077-870e-4bfb-86a3-d373a3f5bf19	nextflow run ../ -params-file params.yml -resume
+2024-12-18 10:46:01	-	irreverent_kilby	-	e6e412836c2662645bae44c597da05bf	e3050ca2-3316-431c-a8e3-4ea84ac1cf4d	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml
+2024-12-18 10:54:23	-	astonishing_lalande	-	e6e412836c2662645bae44c597da05bf	1fb6df55-7085-4bdb-b8fd-35fd03b031dd	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml
+2024-12-18 10:56:26	-	magical_mcclintock	-	e6e412836c2662645bae44c597da05bf	820c194f-b503-4183-9d40-8332f50748d1	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml
+2024-12-18 11:08:53	-	sad_wiles	-	e6e412836c2662645bae44c597da05bf	0e3a65cb-0971-455c-ae85-11ba8a063f58	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml
+2024-12-18 11:10:15	-	boring_yalow	-	e6e412836c2662645bae44c597da05bf	301ce795-5af9-4b4e-a7dc-c9c3763d4853	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml
+2024-12-18 11:10:49	41.1s	compassionate_bose	ERR	c3bf4791e746d258ba39190f0eccbb2a	7227238b-88bb-4bad-96b2-36894076339c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml
+2024-12-18 11:28:24	33m 7s	scruffy_snyder	ERR	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml
+2024-12-18 12:17:49	26.7s	trusting_wilson	ERR	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume
+2024-12-18 12:19:56	2.5s	sad_pasteur	ERR	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume
+2024-12-18 12:22:10	1.8s	festering_elion	ERR	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume
+2024-12-18 12:25:26	2.3s	serene_heyrovsky	ERR	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume
+2024-12-18 12:26:25	2.7s	amazing_plateau	ERR	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume
+2024-12-18 12:35:19	-	evil_volta	-	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume
+2024-12-18 12:36:58	2s	romantic_boltzmann	ERR	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume
+2024-12-18 12:39:19	11m 2s	compassionate_curie	OK	64240f65d9fa25819b27930b55c20514	df81960c-38d8-471a-b4c0-6a66c8ec580c	nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file ./params.yml -resume

@@ -1,7 +1,6 @@
 
-fq_sheet : "${projectDir}/test/test_fastq.tsv"
+fq_sheet : "/project/gzy8899/lyang/DAPseq_pipeline_nf/test/test_fastq.tsv"
 fq_dir : "/project/gzy8899/lyang/TrimAndMapping/test/raw_data"
-bam_sheet : "${projectDir}/test/bam_sheet.tsv"
 bam_dir : "/project/gzy8899/lyang/DAPseq_pipeline_nf/test_out/alignment"
 output_dir : "${projectDir}/test_out"
 fasta : "/project/gzy8899/references/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa"
