@@ -1,8 +1,0 @@
-name: DAPseq_env
-channels:
-  - conda-forge
-  - bioconda
-  - defaults
-dependencies:
-  - ghostscript
-  - meme
