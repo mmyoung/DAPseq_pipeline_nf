@@ -1,5 +1,6 @@
 # DAPseq_pipeline_nf
 A workflow for DAP-seq peak calling and related analysis.
+Trying to modulize the workflow of DAP analysis to save repetitive work.
 
 ## The workflow includes the following steps:
 1. Reads trimming (trim_galore)
@@ -7,6 +8,7 @@ A workflow for DAP-seq peak calling and related analysis.
 1. Peak calling (MACS3)
 2. Motif analysis (MEME Suite)
 3. Peak annotation (HOMER)
+4. FRIP score calculation
 
 ## Test the workflow
 ```
