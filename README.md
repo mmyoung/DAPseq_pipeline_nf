@@ -13,7 +13,7 @@ Trying to modulize the workflow of DAP analysis to save repetitive work.
 ## Test the workflow
 ```
 git clone git@github.com:mmyoung/DAPseq_pipeline_nf.git
-nextflow run /path/to/DAPseq_pipeline_nf -params-file params.yml ## yml file saving all parameters
+nextflow run /path/to/DAPseq_pipeline_nf -params-file params.yml ## yml file saving all parameters, refer to the file in ./test folder for format
 ```
 
 ## Parameters
