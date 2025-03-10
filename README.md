@@ -36,8 +36,9 @@ nextflow run /path/to/DAPseq_pipeline_nf -params-file params.yml ## yml file sav
 conda environment: DAPseq_env (MACS3 and HOMER and MEME suite installed)
 Indexed genome
 
-- need to go through the module folder on the path of softwares to make sure you have permisson on those that are installed by me.
 ```
+Caveats:
+* need to go through the scripts to make sure the path to softwares are executable for current user.
 
 ## Input, example
 1. fq_sheet.csv
