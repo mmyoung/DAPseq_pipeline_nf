@@ -14,7 +14,7 @@ process MEME_MOTIF {
     path  fasta
 
     output:
-    path("*"), emit: txt
+    path("*"), optional: true,emit: txt
 
     shell:
     """
