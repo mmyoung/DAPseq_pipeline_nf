@@ -27,7 +27,7 @@ process TRIMGALORE {
     def tpc_r2 = params.prime3_trim_len > 0 ? "--three_prime_clip_r2 ${params.prime3_trim_len}"             : ''
 
     def prefix = "${meta.id}"
-    print"${meta.single_end}"
+    // print"${meta.single_end}"
     if (meta.single_end) {
         """
         /project/zhuzhuzhang/lyang/software/TrimGalore-0.6.10/trim_galore \\

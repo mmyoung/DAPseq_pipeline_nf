@@ -1,5 +1,5 @@
 process MEME_MOTIF {
-    conda '/project/gzy8899/lyang/DAPseq_pipeline_nf/env_requirment.yml'
+    conda '/project/gzy8899/lyang/DAPseq_pipeline_nf/env_export.yml'
 
     tag "MEME motif analysis"
     label 'Peak_annotation'
