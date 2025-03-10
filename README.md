@@ -37,7 +37,7 @@ conda environment: DAPseq_env (MACS3 and HOMER and MEME suite installed)
 Indexed genome
 
 ```
-Caveats:
+**Caveats**:
 * need to go through the scripts to make sure the path to softwares are executable for current user.
 
 ## Input, example
