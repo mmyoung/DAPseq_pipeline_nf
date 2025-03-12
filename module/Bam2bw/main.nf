@@ -1,5 +1,8 @@
 process BAM2BW {
     tag "Making .bw files from .bam files"
+
+    conda  "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    
     publishDir "${params.output_dir}/bw_output", mode: 'copy'
 
     input:

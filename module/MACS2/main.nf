@@ -5,14 +5,13 @@ process MACS2_CALLPEAK {
 
     conda  "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
 
-
     input:
     tuple val(meta), path(ipbam), path(controlbam)
     val   macs2_gsize
 
     output:
     tuple val(meta.id), path("*.narrowPeak"), emit: peak
-    tuple val(meta.id), path("*.xls")                   , emit: xls
+    tuple val(meta.id), path("*.xls")       , emit: xls
 
     tuple val(meta.id), path("*.gappedPeak"), optional:true, emit: gapped
     tuple val(meta.id), path("*.bed")       , optional:true, emit: bed

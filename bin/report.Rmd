@@ -1,0 +1,50 @@
+---
+title: "result report"
+output: html_document
+params:
+  summary_table:
+    value: x
+  parent_path:
+    value: x
+  output_path:
+
+---
+
+```{r, echo=FALSE, results='asis'}
+library(dplyr)
+library(DT)
+library(kableExtra)
+library(base64enc)
+
+# Load the data
+sample_data <- read.table(params$summary_table,sep="\t")
+colnames(sample_data) <- c("sample","raw read pairs#","mapped reads#","peak#","FRiP_score")
+
+
+# Define the image directory
+image_dir <- paste0(parent_path,"/meme_output")
+
+
+# Add image paths to the data frame
+sample_data <- sample_data %>%
+  mutate(Image_Path = paste0(image_dir, "/", sample, "_meme/logo1.png")) %>%
+  mutate(FRiP_score = round(100* FRiP_score,2))
+
+sample_data$Image <- sapply(sample_data$Image_Path, function(img) {
+  if (file.exists(img)) {
+    encoded <- base64encode(img)
+    ext <- tools::file_ext(img)
+    sprintf('<img src="data:image/%s;base64,%s" style="max-width:100px;">', ext, encoded)
+  } else {
+    "Image not found"
+  }
+})
+
+sample_data$`mapped reads#` <- format(as.numeric(sample_data$`mapped reads#`),big.mark=",")
+
+sample_data <- sample_data %>% select(-Image_Path)
+
+# Generate HTML table with embedded images
+kable(sample_data, escape = FALSE,format = "html") %>%
+  kable_styling("striped", full_width = FALSE)
+```

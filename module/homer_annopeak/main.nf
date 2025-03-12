@@ -19,7 +19,7 @@ process HOMER_ANNOTATEPEAKS {
     """
     if [ -s ${peak} ]
     then
-        if [ $gtf == "*.gtf" ]
+        if [[ $gtf == *.gtf ]]
         then
             /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env/bin/annotatePeaks.pl \\
                 $peak \\
