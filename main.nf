@@ -57,25 +57,25 @@ process COMPLETION_CHECK {
 
 process SAMPLE_REPORTING{
 
-conda  "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    conda  "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    tag "report"
+    publishDir "${params.output_dir}/report", mode: 'copy'
 
-publishDir "${output_dir}/report", mode: 'copy'
+    input:
+        path(sample_sheet)
+        val(output_dir)
+        val(ready_signal)
 
-input:
-    path(sample_sheet)
-    val(output_dir)
-    val(ready_signal)
+    output:
+        path("read_peak.num.summary")
+        path("report.html")
 
-output:
-    path("read_peak.num.summary")
-    path("report.html"), optional:true
+    script:
 
+        def reportPath = "${projectDir}/bin/report.Rmd"
 
-def reportPath = "${projectDir}/bin/report.Rmd"
-
-script:
-    """
-        sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [[ -n "$ID" ]] ;do
+        """
+        sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [[ -n "\${ID}" ]] ;do
             raw_num=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt |grep "Total reads processed:"|sed s/" "//g|cut -d ":" -f 2`
             peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | wc -l `
 
@@ -85,11 +85,15 @@ script:
             printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${peak_num}\t\${FRiP_score}\n"
         done >read_peak.num.summary
 
-       Rscript -e "rmarkdown::render(input = '${reportPath}', 
-                                  output_file='${output_dir}/report/report.html', 
-                                  params=list(summary_table='${output_dir}/report/read_peak.num.summary',parent_path='${output_dir}'))"
+        mkdir -p ${params.output_dir}/report/
+        cp read_peak.num.summary ${params.output_dir}/report/
 
-    """
+        Rscript -e "rmarkdown::render(input = '${reportPath}', 
+                                    output_file='report.html', 
+                                    params=list(summary_table='${params.output_dir}/report/read_peak.num.summary',parent_path='${output_dir}'))"
+
+        cp report.html ${params.output_dir}/report/
+        """
 
 }
 

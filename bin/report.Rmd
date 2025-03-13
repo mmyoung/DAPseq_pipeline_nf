@@ -29,7 +29,7 @@ sample_data <- sample_data %>%
   mutate(Image_Path = paste0(image_dir, "/", sample, "_meme/logo1.png")) %>%
   mutate(FRiP_score = round(100* FRiP_score,2))
 
-sample_data$Image <- sapply(sample_data$Image_Path, function(img) {
+sample_data$motif <- sapply(sample_data$Image_Path, function(img) {
   if (file.exists(img)) {
     encoded <- base64encode(img)
     ext <- tools::file_ext(img)
