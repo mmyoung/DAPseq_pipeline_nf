@@ -75,7 +75,7 @@ def reportPath = "${projectDir}/bin/report.Rmd"
 
 script:
     """
-        while IFS=',' read ID fq1 _ _ _;do
+        sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [[ -n "$ID" ]] ;do
             raw_num=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt |grep "Total reads processed:"|sed s/" "//g|cut -d ":" -f 2`
             peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | wc -l `
 
@@ -83,7 +83,7 @@ script:
             FRiP_score=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 4`
 
             printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${peak_num}\t\${FRiP_score}\n"
-        done < <(sed "1d" ${sample_sheet}) >read_peak.num.summary
+        done >read_peak.num.summary
 
        Rscript -e "rmarkdown::render(input = '${reportPath}', 
                                   output_file='${output_dir}/report/report.html', 
