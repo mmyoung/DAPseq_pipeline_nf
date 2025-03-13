@@ -1,0 +1,153 @@
+Mar-12 17:03:01.243 [main] DEBUG nextflow.cli.Launcher - $> nextflow run ../ -params-file params.yml -resume
+Mar-12 17:03:01.322 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Mar-12 17:03:01.338 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/project/zhuzhuzhang/lyang/nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Mar-12 17:03:01.345 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Mar-12 17:03:01.346 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Mar-12 17:03:01.348 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Mar-12 17:03:01.355 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Mar-12 17:03:01.927 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Mar-12 17:03:01.928 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Mar-12 17:03:01.966 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Mar-12 17:03:02.031 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Mar-12 17:03:02.046 [main] INFO  nextflow.cli.CmdRun - Launching `../main.nf` [angry_jang] DSL2 - revision: b8fccd3620
+Mar-12 17:03:02.046 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Mar-12 17:03:02.046 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Mar-12 17:03:02.054 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /project/zhuzhuzhang/lyang/nextflow/secrets/store.json
+Mar-12 17:03:02.057 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@28ee7bee] - activable => nextflow.secret.LocalSecretsProvider@28ee7bee
+Mar-12 17:03:02.100 [main] DEBUG nextflow.Session - Session UUID: a9b9c4e0-ec2c-48fc-9120-2761a4135ca6
+Mar-12 17:03:02.101 [main] DEBUG nextflow.Session - Run name: angry_jang
+Mar-12 17:03:02.101 [main] DEBUG nextflow.Session - Executor pool size: 64
+Mar-12 17:03:02.107 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Mar-12 17:03:02.111 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-12 17:03:07.144 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (16:01 CDT)
+  System: Linux 4.18.0-305.57.1.el8_4.x86_64
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 20.0.2-internal-adhoc..src
+  Encoding: UTF-8 (UTF-8)
+  Process: 1774152@midway3-login3.rcc.local [10.50.248.65]
+  CPUs: 64 - Mem: 251.1 GB (50.6 GB) - Swap: 4 GB (3.7 GB)
+Mar-12 17:03:07.183 [main] DEBUG nextflow.Session - Work-dir: /project/zhuzhuzhang/lyang/nextflow/work [gpfs]
+Mar-12 17:03:07.203 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Mar-12 17:03:07.211 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Mar-12 17:03:07.230 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Mar-12 17:03:07.239 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 65; maxThreads: 1000
+Mar-12 17:03:07.324 [main] DEBUG nextflow.Session - Session start
+Mar-12 17:03:07.781 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Mar-12 17:03:07.794 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `help` -- Initialise it to a default value eg. `params.help = some_value`
+Mar-12 17:03:08.552 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.555 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.573 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Mar-12 17:03:08.583 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Mar-12 17:03:08.585 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Mar-12 17:03:08.587 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Mar-12 17:03:08.703 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.704 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.711 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.711 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.727 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.727 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.735 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.735 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.753 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.753 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.761 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.762 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.769 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.769 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.776 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.776 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.794 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 17:03:08.794 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 17:03:08.795 [main] WARN  nextflow.executor.ExecutorFactory - Process 'COMPLETION_CHECK' cannot be executed by 'slurm' executor -- Using 'local' executor instead
+Mar-12 17:03:08.799 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Mar-12 17:03:08.804 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=64; memory=251.1 GB; capacity=64; pollInterval=100ms; dumpInterval=5m
+Mar-12 17:03:08.805 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Mar-12 17:03:08.824 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_727b47f4e5e313b1: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/calculate_FRiP/main.nf
+  Script_4796af7782176331: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/MEME_motif/main.nf
+  Script_faefbdae21d650e0: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Fastqc/main.nf
+  Script_ab0bfe3327547854: /project/gzy8899/lyang/DAPseq_pipeline_nf/./subworkflow/input_check.nf
+  Script_95e8911a291dac10: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Bowtie2Mapping/main.nf
+  Script_91282670592e6c33: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/markduplicates/main.nf
+  Script_bc0e3f4a0b568ec3: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/homer_annopeak/main.nf
+  Script_28a4698b37c534cb: /project/gzy8899/lyang/DAPseq_pipeline_nf/main.nf
+  Script_285b099ff52b6b01: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/MACS2/main.nf
+  Script_87ecdf97c8571721: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Trimgalore/main.nf
+  Script_164f28fa0e023647: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/CoverageCal/main.nf
+  Script_3356e8ae54f054dd: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Bam2bw/main.nf
+Mar-12 17:03:08.824 [main] DEBUG nextflow.Session - Session aborted -- Cause: Unknown variable 'True'
+Mar-12 17:03:08.848 [main] DEBUG nextflow.Session - The following nodes are still active:
+  [operator] ifEmpty
+  [operator] splitCsv
+  [operator] map
+  [operator] join
+  [operator] map
+  [operator] count
+
+Mar-12 17:03:08.850 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Mar-12 17:03:08.850 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Mar-12 17:03:08.851 [main] ERROR nextflow.cli.Launcher - @unknown
+groovy.lang.MissingPropertyException: Unknown variable 'True'
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:484)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:72)
+	at org.codehaus.groovy.reflection.CachedConstructor.doConstructorInvoke(CachedConstructor.java:59)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrap.callConstructor(ConstructorSite.java:84)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:59)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:295)
+	at nextflow.script.ProcessConfig.getProperty(ProcessConfig.groovy:280)
+	at org.codehaus.groovy.runtime.InvokerHelper.getProperty(InvokerHelper.java:190)
+	at groovy.lang.Closure.getPropertyTryThese(Closure.java:320)
+	at groovy.lang.Closure.getPropertyDelegateFirst(Closure.java:310)
+	at groovy.lang.Closure.getProperty(Closure.java:296)
+	at org.codehaus.groovy.runtime.callsite.PogoGetPropertySite.getProperty(PogoGetPropertySite.java:49)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callGroovyObjectGetProperty(AbstractCallSite.java:341)
+	at Script_28a4698b37c534cb$_runScript_closure2.doCall(Script_28a4698b37c534cb:69)
+	at Script_28a4698b37c534cb$_runScript_closure2.doCall(Script_28a4698b37c534cb)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1030)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at groovy.lang.Closure.call(Closure.java:406)
+	at nextflow.script.ProcessDef.initialize(ProcessDef.groovy:110)
+	at nextflow.script.ProcessDef.run(ProcessDef.groovy:168)
+	at nextflow.script.BindableDef.invoke_a(BindableDef.groovy:51)
+	at nextflow.script.ComponentDef.invoke_o(ComponentDef.groovy:40)
+	at nextflow.script.WorkflowBinding.invokeMethod(WorkflowBinding.groovy:102)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeOnDelegationObjects(ClosureMetaClass.java:408)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:350)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.callCurrent(PogoMetaClassSite.java:61)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:203)
+	at Script_28a4698b37c534cb$_runScript_closure3$_closure8.doCall(Script_28a4698b37c534cb:154)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:274)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1030)
+	at groovy.lang.Closure.call(Closure.java:427)
+	at groovy.lang.Closure.call(Closure.java:406)
+	at nextflow.script.WorkflowDef.run0(WorkflowDef.groovy:204)
+	at nextflow.script.WorkflowDef.run(WorkflowDef.groovy:188)
+	at nextflow.script.BindableDef.invoke_a(BindableDef.groovy:51)
+	at nextflow.script.IterableDef$invoke_a.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:183)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:192)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:236)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:242)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:137)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:372)
+	at nextflow.cli.Launcher.run(Launcher.groovy:500)
+	at nextflow.cli.Launcher.main(Launcher.groovy:672)
+Mar-12 17:03:08.855 [Actor Thread 8] DEBUG nextflow.Nextflow - Ignoring exit because execution is already aborted -- message=bam sheet not found

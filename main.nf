@@ -42,6 +42,57 @@ include {HOMER_ANNOTATEPEAKS} from "./module/homer_annopeak"
 include {MEME_MOTIF} from "./module/MEME_motif"
 include {CAL_FRIP} from "./module/calculate_FRiP"
 
+// Define a process to collect completion signals
+process COMPLETION_CHECK {
+    input:
+        val(count)
+        val(output_dir)
+    
+    output:
+        val(true), emit: ready
+    
+    exec:
+        println "All $count samples have completed processing"
+}
+
+process SAMPLE_REPORTING{
+
+conda  "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+
+publishDir "${output_dir}/report", mode: 'copy'
+
+input:
+    path(sample_sheet)
+    val(output_dir)
+    val(ready_signal)
+
+output:
+    path("read_peak.num.summary")
+    path("report.html"), optional:true
+
+
+def reportPath = "${projectDir}/bin/report.Rmd"
+
+script:
+    """
+        while IFS=',' read ID fq1 _ _ _;do
+            raw_num=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt |grep "Total reads processed:"|sed s/" "//g|cut -d ":" -f 2`
+            peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | wc -l `
+
+            mapped_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 3`
+            FRiP_score=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 4`
+
+            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${peak_num}\t\${FRiP_score}\n"
+        done < <(sed "1d" ${sample_sheet}) >read_peak.num.summary
+
+       Rscript -e "rmarkdown::render(input = '${reportPath}', 
+                                  output_file='${output_dir}/report/report.html', 
+                                  params=list(summary_table='${output_dir}/report/read_peak.num.summary',parent_path='${output_dir}'))"
+
+    """
+
+}
+
 
 workflow {
 
@@ -65,13 +116,13 @@ workflow {
     BAM2BW(ch_genome_bam_bai)
     COVERAGE(ch_genome_bam_bai)
 
-    ch_genome_bam_bai
-        .combine(ch_genome_bam_bai)
-        .map { 
-            meta1, bam1, bai1, meta2, bam2, bai2 ->
-                meta1.control == meta2.id ? [ meta1, [ bam1, bam2 ], [ bai1, bai2 ] ] : [ meta1, [ bam1, null ], [ bai1, null ] ] 
-        }
-        .set { ch_ip_control_bam_bai }
+//    ch_genome_bam_bai
+//       .combine(ch_genome_bam_bai)
+//        .map { 
+//            meta1, bam1, bai1, meta2, bam2, bai2 ->
+//                meta1.control == meta2.id ? [ meta1, [ bam1, bam2 ], [ bai1, bai2 ] ] : [ meta1, [ bam1, null ], [ bai1, null ] ] 
+//        }
+//        .set { ch_ip_control_bam_bai }
 
 //    ch_genome_bam_bai.view()
 
@@ -92,5 +143,25 @@ workflow {
     HOMER_ANNOTATEPEAKS(MACS2_CALLPEAK.out.peak, params.fasta, params.gtf)
 // analyze motif of peaks using MEME suite
     MEME_MOTIF(MACS2_CALLPEAK.out.peak, params.fasta)
+// Count the number of samples and wait for all processes to complete
+    CAL_FRIP.out.txt
+        .count()
+        .set { sample_count }
     
+    // Create a completion check that waits for all processes
+    COMPLETION_CHECK(sample_count, params.output_dir)
+    
+    // Run the reporting at the end of the main workflow after completion check
+    SAMPLE_REPORTING(
+        params.fq_sheet,
+        params.output_dir,
+        COMPLETION_CHECK.out.ready
+    )
 }
+
+workflow.onComplete {
+    log.info "Pipeline completed at: $workflow.complete"
+    log.info "Execution status: ${ workflow.success ? 'OK' : 'failed' }"
+    log.info "Execution duration: $workflow.duration"
+}
+

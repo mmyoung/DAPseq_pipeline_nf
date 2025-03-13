@@ -1,3 +1,4 @@
 sample,fq1,fq2,single_end,control
-IP,SRR27496336_1.fastq,SRR27496336_2.fastq,0,Input
-Input,SRR27496337_1.fastq,SRR27496337_2.fastq,0,
+DAP_A.t_10day_old_seedlings_root_FAR1,ROM-195s-RO-055_S55_L006_R1_001.fastq.gz,ROM-195s-RO-055_S55_L006_R2_001.fastq.gz,0,
+DAP_A.t_10day_old_seedlings_root_MBD5,ROM-195s-RO-043_S43_L006_R1_001.fastq.gz,ROM-195s-RO-043_S43_L006_R2_001.fastq.gz,0,
+DAP_A.t_10day_old_seedlings_root_MBD6,ROM-195s-RO-049_S49_L006_R1_001.fastq.gz,ROM-195s-RO-049_S49_L006_R2_001.fastq.gz,0,

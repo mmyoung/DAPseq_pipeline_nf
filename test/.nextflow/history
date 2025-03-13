@@ -1,0 +1,29 @@
+2025-03-12 14:46:41	-	distracted_bardeen	-	9ac28914a116409f0096d9486593aaab	3235a22e-99e3-4e1b-95d6-ba4e67cc554a	nextflow run ../ -params-file params.yml
+2025-03-12 14:47:48	4m 32s	insane_engelbart	OK	e9adedfd8eea925c22439670b0b120da	a55f596e-5b23-49fa-9a33-219470c9ffb5	nextflow run ../ -params-file params.yml
+2025-03-12 15:02:58	12.1s	admiring_thompson	OK	c73b7e576eaa39fd885690558e83b077	a55f596e-5b23-49fa-9a33-219470c9ffb5	nextflow run ../ -params-file params.yml -resume
+2025-03-12 15:03:30	2m 52s	pensive_maxwell	OK	c73b7e576eaa39fd885690558e83b077	c49bac8f-b0df-4baf-bcc0-2d13a5b3818f	nextflow run ../ -params-file params.yml
+2025-03-12 15:52:31	-	mad_snyder	-	b6d0fbac22a8f88ece4811f4f879150e	32f7e36d-472d-4ddc-9ab1-3d741f2a0e07	nextflow run ../ -params-file params.yml
+2025-03-12 15:55:41	3s	cheeky_poisson	ERR	25d6dea28fe2b8ac29267dd930e59c5d	a7ea3b4e-32fb-42de-977e-ee1791fb9fd6	nextflow run ../ -params-file params.yml
+2025-03-12 16:00:26	2.6s	admiring_hopper	ERR	67cc1e78c28e746c824908772cf93410	90cc1e06-bb37-4a86-a03b-765167444951	nextflow run ../ -params-file params.yml
+2025-03-12 16:01:12	1.9s	grave_kilby	ERR	b7b4581d3bc365a6dd690b4b3daedcc0	3f6a1b4b-5a28-4bd2-83ae-1e55410c6279	nextflow run ../ -params-file params.yml
+2025-03-12 16:02:51	13.6s	stoic_murdock	ERR	bd9af7ee1ccef04736715a0202c6a91f	c33c6d80-e8b8-405f-a47d-6a8923fec541	nextflow run ../ -params-file params.yml
+2025-03-12 16:05:55	-	angry_wiles	-	9601031488d3887a6777d0f268a1c97e	b953bc1c-8e47-4add-abc9-b832064aef12	nextflow run ../ -params-file params.yml
+2025-03-12 16:07:20	3m 2s	astonishing_dijkstra	ERR	ad6326659e4c26900202a89e10520ee7	6e3cf3a6-28ba-48b2-bfd0-e64ac9853516	nextflow run ../ -params-file params.yml
+2025-03-12 16:13:59	-	confident_kimura	-	5fc683b6736ac1c1ae7af0d0473921f6	a5c30a5a-c4b1-4ef9-a967-d613fff8ff90	nextflow run ../ -params-file params.yml
+2025-03-12 16:14:19	2m 13s	kickass_angela	ERR	9c62c992634895430f21fa70d1f9f004	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml
+2025-03-12 16:17:21	42.8s	dreamy_allen	ERR	74aa56e40e316ee56eb940c082b1e8e4	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:18:29	17.5s	loving_mcclintock	ERR	2f435a56e9adc6d5509933b569541cac	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:19:55	43s	friendly_wing	ERR	0b939aa42de4ab9d338ec0489c1d7cb9	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:24:28	13.1s	infallible_brahmagupta	ERR	6f2ac34f88933cfd4ad3ea7c4c401eba	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:25:33	53.2s	high_goldstine	ERR	53101f27cd04d07b71f81e4a5437fe41	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:27:29	27.3s	scruffy_fermat	ERR	fdff5cb8c9a2aba6aef1fcce3947dc4a	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:32:18	27s	irreverent_leibniz	ERR	e31830ae982a75ee136cf3abe901397d	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:34:58	31.7s	maniac_mayer	ERR	8bbdc483fb9e9b87f01dc339a72542e5	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:36:24	1m 27s	berserk_dalembert	ERR	8079051ed0fa1c588401e39116e728b6	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:38:37	1m 27s	shrivelled_brattain	OK	0a2dc6545735694c07ffdbbd16c95dc6	b8e9d1f1-585a-436c-b4a6-f75b99b66eab	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:48:40	1m 32s	sick_rubens	ERR	3ad15b733da684e454bab6a889a7b56b	a9b9c4e0-ec2c-48fc-9120-2761a4135ca6	nextflow run ../ -params-file params.yml
+2025-03-12 16:56:36	26.7s	furious_kalman	ERR	b77e4246bd55d3a3111be52951c7ddd4	a9b9c4e0-ec2c-48fc-9120-2761a4135ca6	nextflow run ../ -params-file params.yml -resume
+2025-03-12 16:59:25	31.7s	marvelous_pauling	ERR	d91f4992ea8dd088b9dae658da1ed33c	a9b9c4e0-ec2c-48fc-9120-2761a4135ca6	nextflow run ../ -params-file params.yml -resume
+2025-03-12 17:03:07	-	angry_jang	-	b8fccd3620d91f64ce79dce3be2b0a59	a9b9c4e0-ec2c-48fc-9120-2761a4135ca6	nextflow run ../ -params-file params.yml -resume
+2025-03-12 17:03:31	1m 37s	admiring_stone	OK	09d86edc54e12d6639b59f49ca6c1041	a9b9c4e0-ec2c-48fc-9120-2761a4135ca6	nextflow run ../ -params-file params.yml -resume
+2025-03-12 20:53:30	2m 37s	thirsty_kare	OK	36314ebac011ccff32c1f39e211081c5	e0ff3ed5-920c-478b-a975-168ec59d0106	nextflow run ../ -params-file params.yml

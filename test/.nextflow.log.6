@@ -1,0 +1,161 @@
+Mar-12 16:38:37.050 [main] DEBUG nextflow.cli.Launcher - $> nextflow run ../ -params-file params.yml -resume
+Mar-12 16:38:37.115 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 23.10.1
+Mar-12 16:38:37.140 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/project/zhuzhuzhang/lyang/nextflow/plugins; core-plugins: nf-amazon@2.1.4,nf-azure@1.3.3,nf-cloudcache@0.3.0,nf-codecommit@0.1.5,nf-console@1.0.6,nf-ga4gh@1.1.0,nf-google@1.8.3,nf-tower@1.6.3,nf-wave@1.0.1
+Mar-12 16:38:37.147 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Mar-12 16:38:37.148 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Mar-12 16:38:37.150 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Mar-12 16:38:37.156 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Mar-12 16:38:37.609 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Mar-12 16:38:37.610 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /project/gzy8899/lyang/DAPseq_pipeline_nf/nextflow.config
+Mar-12 16:38:37.643 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Mar-12 16:38:37.696 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declararion
+Mar-12 16:38:37.708 [main] INFO  nextflow.cli.CmdRun - Launching `../main.nf` [shrivelled_brattain] DSL2 - revision: 0a2dc65457
+Mar-12 16:38:37.709 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Mar-12 16:38:37.709 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Mar-12 16:38:37.716 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /project/zhuzhuzhang/lyang/nextflow/secrets/store.json
+Mar-12 16:38:37.719 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@54755dd9] - activable => nextflow.secret.LocalSecretsProvider@54755dd9
+Mar-12 16:38:37.758 [main] DEBUG nextflow.Session - Session UUID: b8e9d1f1-585a-436c-b4a6-f75b99b66eab
+Mar-12 16:38:37.758 [main] DEBUG nextflow.Session - Run name: shrivelled_brattain
+Mar-12 16:38:37.759 [main] DEBUG nextflow.Session - Executor pool size: 64
+Mar-12 16:38:37.764 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Mar-12 16:38:37.767 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-12 16:38:37.788 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 23.10.1 build 5891
+  Created: 12-01-2024 22:01 UTC (16:01 CDT)
+  System: Linux 4.18.0-305.57.1.el8_4.x86_64
+  Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 20.0.2-internal-adhoc..src
+  Encoding: UTF-8 (UTF-8)
+  Process: 1459526@midway3-login3.rcc.local [10.50.248.65]
+  CPUs: 64 - Mem: 251.1 GB (67.3 GB) - Swap: 4 GB (3.7 GB)
+Mar-12 16:38:37.811 [main] DEBUG nextflow.Session - Work-dir: /project/zhuzhuzhang/lyang/nextflow/work [gpfs]
+Mar-12 16:38:37.825 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Mar-12 16:38:37.831 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Mar-12 16:38:37.845 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Mar-12 16:38:37.852 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 65; maxThreads: 1000
+Mar-12 16:38:37.927 [main] DEBUG nextflow.Session - Session start
+Mar-12 16:38:38.251 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Mar-12 16:38:38.259 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `help` -- Initialise it to a default value eg. `params.help = some_value`
+Mar-12 16:38:38.814 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.814 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.821 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Mar-12 16:38:38.826 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Mar-12 16:38:38.827 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Mar-12 16:38:38.828 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Mar-12 16:38:38.868 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.868 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.871 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.871 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.877 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.878 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.880 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.881 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.888 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.888 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.892 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.892 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.895 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.895 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.897 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.897 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.904 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.904 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.904 [main] WARN  nextflow.executor.ExecutorFactory - Process 'COMPLETION_CHECK' cannot be executed by 'slurm' executor -- Using 'local' executor instead
+Mar-12 16:38:38.906 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Mar-12 16:38:38.908 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=64; memory=251.1 GB; capacity=64; pollInterval=100ms; dumpInterval=5m
+Mar-12 16:38:38.909 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Mar-12 16:38:38.912 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: slurm
+Mar-12 16:38:38.912 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Mar-12 16:38:38.914 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: FASTQC, MEME_MOTIF, HOMER_ANNOTATEPEAKS, BOWTIE2MAP, COVERAGE, TRIMGALORE, MACS2_CALLPEAK, SAMPLE_REPORTING, CAL_FRIP, COMPLETION_CHECK, BAM2BW, MARK_DUPLICATES
+Mar-12 16:38:38.914 [main] DEBUG nextflow.Session - Igniting dataflow network (12)
+Mar-12 16:38:38.918 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > TRIMGALORE
+Mar-12 16:38:38.919 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > BOWTIE2MAP
+Mar-12 16:38:38.919 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > FASTQC
+Mar-12 16:38:38.919 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > BAM2BW
+Mar-12 16:38:38.919 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COVERAGE
+Mar-12 16:38:38.919 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MACS2_CALLPEAK
+Mar-12 16:38:38.920 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > CAL_FRIP
+Mar-12 16:38:38.920 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > HOMER_ANNOTATEPEAKS
+Mar-12 16:38:38.920 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MEME_MOTIF
+Mar-12 16:38:38.920 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMPLETION_CHECK
+Mar-12 16:38:38.920 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SAMPLE_REPORTING
+Mar-12 16:38:38.921 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_4796af7782176331: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/MEME_motif/main.nf
+  Script_727b47f4e5e313b1: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/calculate_FRiP/main.nf
+  Script_faefbdae21d650e0: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Fastqc/main.nf
+  Script_ab0bfe3327547854: /project/gzy8899/lyang/DAPseq_pipeline_nf/./subworkflow/input_check.nf
+  Script_95e8911a291dac10: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Bowtie2Mapping/main.nf
+  Script_91282670592e6c33: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/markduplicates/main.nf
+  Script_bc0e3f4a0b568ec3: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/homer_annopeak/main.nf
+  Script_285b099ff52b6b01: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/MACS2/main.nf
+  Script_71879fff03d1ac81: /project/gzy8899/lyang/DAPseq_pipeline_nf/main.nf
+  Script_164f28fa0e023647: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/CoverageCal/main.nf
+  Script_87ecdf97c8571721: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Trimgalore/main.nf
+  Script_3356e8ae54f054dd: /project/gzy8899/lyang/DAPseq_pipeline_nf/./module/Bam2bw/main.nf
+Mar-12 16:38:38.921 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Mar-12 16:38:38.921 [main] DEBUG nextflow.Session - Session await
+Mar-12 16:38:39.085 [Actor Thread 26] INFO  nextflow.processor.TaskProcessor - [cf/547fed] Cached process > TRIMGALORE (Adapter and low-quality based trimming)
+Mar-12 16:38:39.085 [Actor Thread 24] INFO  nextflow.processor.TaskProcessor - [a7/0c00aa] Cached process > TRIMGALORE (Adapter and low-quality based trimming)
+Mar-12 16:38:39.085 [Actor Thread 28] INFO  nextflow.processor.TaskProcessor - [f7/a8c2cb] Cached process > TRIMGALORE (Adapter and low-quality based trimming)
+Mar-12 16:38:39.139 [Actor Thread 28] DEBUG nextflow.processor.TaskProcessor - Process TRIMGALORE > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Mar-12 16:38:39.140 [Actor Thread 28] DEBUG nextflow.processor.TaskProcessor - Process TRIMGALORE > Skipping output binding because one or more optional files are missing: fileoutparam<3:1>
+Mar-12 16:38:39.141 [Actor Thread 24] DEBUG nextflow.processor.TaskProcessor - Process TRIMGALORE > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Mar-12 16:38:39.141 [Actor Thread 24] DEBUG nextflow.processor.TaskProcessor - Process TRIMGALORE > Skipping output binding because one or more optional files are missing: fileoutparam<3:1>
+Mar-12 16:38:39.142 [Actor Thread 26] DEBUG nextflow.processor.TaskProcessor - Process TRIMGALORE > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Mar-12 16:38:39.142 [Actor Thread 26] DEBUG nextflow.processor.TaskProcessor - Process TRIMGALORE > Skipping output binding because one or more optional files are missing: fileoutparam<3:1>
+Mar-12 16:38:39.151 [Actor Thread 35] INFO  nextflow.processor.TaskProcessor - [ca/ca8ea3] Cached process > FASTQC (FASTQC)
+Mar-12 16:38:39.151 [Actor Thread 42] INFO  nextflow.processor.TaskProcessor - [8b/b57f61] Cached process > FASTQC (FASTQC)
+Mar-12 16:38:39.151 [Actor Thread 26] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Mar-12 16:38:39.152 [Actor Thread 47] INFO  nextflow.processor.TaskProcessor - [d4/df3800] Cached process > FASTQC (FASTQC)
+Mar-12 16:38:39.157 [Actor Thread 40] INFO  nextflow.processor.TaskProcessor - [49/3e786c] Cached process > BOWTIE2MAP (Mapping clean reads to bowtie index)
+Mar-12 16:38:39.157 [Actor Thread 36] INFO  nextflow.processor.TaskProcessor - [41/fa1e4f] Cached process > BOWTIE2MAP (Mapping clean reads to bowtie index)
+Mar-12 16:38:39.158 [Actor Thread 48] INFO  nextflow.processor.TaskProcessor - [94/e496a3] Cached process > BOWTIE2MAP (Mapping clean reads to bowtie index)
+Mar-12 16:38:39.171 [Actor Thread 36] INFO  nextflow.processor.TaskProcessor - [89/f03cc2] Cached process > COVERAGE (Calculate the reads coverage in each base ...)
+Mar-12 16:38:39.171 [Actor Thread 48] INFO  nextflow.processor.TaskProcessor - [a9/ecdd9a] Cached process > COVERAGE (Calculate the reads coverage in each base ...)
+Mar-12 16:38:39.171 [Actor Thread 57] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env; path=/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env
+Mar-12 16:38:39.175 [Actor Thread 59] INFO  nextflow.processor.TaskProcessor - [f7/ac429b] Cached process > BAM2BW (Making .bw files from .bam files)
+Mar-12 16:38:39.175 [Actor Thread 60] INFO  nextflow.processor.TaskProcessor - [47/47935e] Cached process > BAM2BW (Making .bw files from .bam files)
+Mar-12 16:38:39.176 [Actor Thread 52] INFO  nextflow.processor.TaskProcessor - [53/5bea13] Cached process > BAM2BW (Making .bw files from .bam files)
+Mar-12 16:38:39.180 [Actor Thread 56] INFO  nextflow.processor.TaskProcessor - [0d/54bff9] Cached process > MACS2_CALLPEAK (MACS2 calling peak)
+Mar-12 16:38:39.181 [Actor Thread 56] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Mar-12 16:38:39.181 [Actor Thread 56] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<4:1>
+Mar-12 16:38:39.182 [Actor Thread 58] INFO  nextflow.processor.TaskProcessor - [92/f12ff9] Cached process > MACS2_CALLPEAK (MACS2 calling peak)
+Mar-12 16:38:39.182 [Actor Thread 64] INFO  nextflow.processor.TaskProcessor - [cd/6fc61d] Cached process > MACS2_CALLPEAK (MACS2 calling peak)
+Mar-12 16:38:39.182 [Actor Thread 58] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Mar-12 16:38:39.182 [Actor Thread 58] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<4:1>
+Mar-12 16:38:39.183 [Actor Thread 64] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<2:1>
+Mar-12 16:38:39.183 [Actor Thread 64] DEBUG nextflow.processor.TaskProcessor - Process MACS2_CALLPEAK > Skipping output binding because one or more optional files are missing: fileoutparam<4:1>
+Mar-12 16:38:39.226 [Actor Thread 57] INFO  nextflow.processor.TaskProcessor - [21/da31a0] Cached process > MEME_MOTIF (MEME motif analysis)
+Mar-12 16:38:39.226 [Actor Thread 51] INFO  nextflow.processor.TaskProcessor - [87/1bf05e] Cached process > MEME_MOTIF (MEME motif analysis)
+Mar-12 16:38:39.227 [Actor Thread 63] INFO  nextflow.processor.TaskProcessor - [3b/016c4a] Cached process > MEME_MOTIF (MEME motif analysis)
+Mar-12 16:38:39.228 [Actor Thread 64] DEBUG nextflow.conda.CondaCache - conda found local env for environment=/project/gzy8899/lyang/DAPseq_pipeline_nf/env_export.yml; path=/project/zhuzhuzhang/lyang/nextflow/conda_env/DAPseq_env-cc84506c8bc833644d170578da6a957e
+Mar-12 16:38:39.230 [Actor Thread 56] INFO  nextflow.processor.TaskProcessor - [f4/8c31f6] Cached process > CAL_FRIP (FRiP calculation)
+Mar-12 16:38:39.234 [Actor Thread 36] INFO  nextflow.processor.TaskProcessor - [b4/db20ce] Cached process > CAL_FRIP (FRiP calculation)
+Mar-12 16:38:39.234 [Actor Thread 59] INFO  nextflow.processor.TaskProcessor - [4a/c39af1] Cached process > CAL_FRIP (FRiP calculation)
+Mar-12 16:38:39.239 [Actor Thread 53] INFO  nextflow.processor.TaskProcessor - [13/7e17ea] Cached process > COMPLETION_CHECK
+Mar-12 16:38:39.328 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process COVERAGE (Calculate the reads coverage in each base ...) > jobId: 29232242; workDir: /project/zhuzhuzhang/lyang/nextflow/work/b0/ba3434d0d4f1619924ac90d8ce734f
+Mar-12 16:38:39.328 [Task submitter] INFO  nextflow.Session - [b0/ba3434] Submitted process > COVERAGE (Calculate the reads coverage in each base ...)
+Mar-12 16:38:39.422 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process HOMER_ANNOTATEPEAKS (Homer peak annotation) > jobId: 29232243; workDir: /project/zhuzhuzhang/lyang/nextflow/work/49/7775b66c8279fc2ef710bcc63fc486
+Mar-12 16:38:39.422 [Task submitter] INFO  nextflow.Session - [49/7775b6] Submitted process > HOMER_ANNOTATEPEAKS (Homer peak annotation)
+Mar-12 16:38:39.509 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process HOMER_ANNOTATEPEAKS (Homer peak annotation) > jobId: 29232244; workDir: /project/zhuzhuzhang/lyang/nextflow/work/f9/23fc85567be370b5dfc59beb6b1fea
+Mar-12 16:38:39.509 [Task submitter] INFO  nextflow.Session - [f9/23fc85] Submitted process > HOMER_ANNOTATEPEAKS (Homer peak annotation)
+Mar-12 16:38:39.596 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process HOMER_ANNOTATEPEAKS (Homer peak annotation) > jobId: 29232245; workDir: /project/zhuzhuzhang/lyang/nextflow/work/c6/4582726f60c10f2f302c489ab67e60
+Mar-12 16:38:39.597 [Task submitter] INFO  nextflow.Session - [c6/458272] Submitted process > HOMER_ANNOTATEPEAKS (Homer peak annotation)
+Mar-12 16:38:39.684 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process SAMPLE_REPORTING > jobId: 29232246; workDir: /project/zhuzhuzhang/lyang/nextflow/work/55/f60a4e26388d7a36d3c5cb50b0f60e
+Mar-12 16:38:39.684 [Task submitter] INFO  nextflow.Session - [55/f60a4e] Submitted process > SAMPLE_REPORTING
+Mar-12 16:38:43.859 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 29232246; id: 29; name: SAMPLE_REPORTING; status: COMPLETED; exit: 0; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/work/55/f60a4e26388d7a36d3c5cb50b0f60e started: 1741815523857; exited: 2025-03-12T21:38:41.115538Z; ]
+Mar-12 16:39:58.849 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 29232243; id: 20; name: HOMER_ANNOTATEPEAKS (Homer peak annotation); status: COMPLETED; exit: 0; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/work/49/7775b66c8279fc2ef710bcc63fc486 started: 1741815523851; exited: 2025-03-12T21:39:54.830707Z; ]
+Mar-12 16:39:58.860 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 29232244; id: 23; name: HOMER_ANNOTATEPEAKS (Homer peak annotation); status: COMPLETED; exit: 0; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/work/f9/23fc85567be370b5dfc59beb6b1fea started: 1741815523854; exited: 2025-03-12T21:39:55.734432Z; ]
+Mar-12 16:40:03.848 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 29232242; id: 11; name: COVERAGE (Calculate the reads coverage in each base ...); status: COMPLETED; exit: 0; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/work/b0/ba3434d0d4f1619924ac90d8ce734f started: 1741815523831; exited: 2025-03-12T21:39:59.200825Z; ]
+Mar-12 16:40:03.853 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 29232245; id: 25; name: HOMER_ANNOTATEPEAKS (Homer peak annotation); status: COMPLETED; exit: 0; error: -; workDir: /project/zhuzhuzhang/lyang/nextflow/work/c6/4582726f60c10f2f302c489ab67e60 started: 1741815523855; exited: 2025-03-12T21:40:02.63004Z; ]
+Mar-12 16:40:03.861 [main] DEBUG nextflow.Session - Session await > all processes finished
+Mar-12 16:40:03.862 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Mar-12 16:40:03.943 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Mar-12 16:40:03.944 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Mar-12 16:40:03.947 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Mar-12 16:40:03.949 [main] INFO  nextflow.Nextflow - Pipeline completed at: 2025-03-12T16:40:03.947591092-05:00
+Mar-12 16:40:03.949 [main] INFO  nextflow.Nextflow - Execution status: OK
+Mar-12 16:40:03.949 [main] INFO  nextflow.Nextflow - Execution duration: 1m 26s
+Mar-12 16:40:03.953 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=5; failedCount=0; ignoredCount=0; cachedCount=24; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=5m 10s; failedDuration=0ms; cachedDuration=5m 18s;loadCpus=0; loadMemory=0; peakRunning=5; peakCpus=5; peakMemory=0; ]
+Mar-12 16:40:04.039 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Mar-12 16:40:04.095 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Mar-12 16:40:04.095 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

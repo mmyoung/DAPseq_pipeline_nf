@@ -6,7 +6,6 @@ params:
     value: x
   parent_path:
     value: x
-  output_path:
 
 ---
 
@@ -17,12 +16,12 @@ library(kableExtra)
 library(base64enc)
 
 # Load the data
-sample_data <- read.table(params$summary_table,sep="\t")
+sample_data <- read.table(params$summary_table,sep="\t",header=F)
 colnames(sample_data) <- c("sample","raw read pairs#","mapped reads#","peak#","FRiP_score")
 
 
 # Define the image directory
-image_dir <- paste0(parent_path,"/meme_output")
+image_dir <- paste0(params$parent_path,"/meme_output")
 
 
 # Add image paths to the data frame

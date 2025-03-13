@@ -1,7 +1,5 @@
-
 fq_sheet : "/project/gzy8899/lyang/DAPseq_pipeline_nf/test/test_fastq.tsv"
-fq_dir : "/project/gzy8899/lyang/TrimAndMapping/test/raw_data"
-bam_dir : "/project/gzy8899/lyang/DAPseq_pipeline_nf/test_out/alignment"
+fq_dir : "/project/gzy8899/lyang/20250307_DAP-RNA_pooled_sequencing/raw_data"
 output_dir : "${projectDir}/test_out"
 fasta : "/project/gzy8899/references/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa"
 gtf : "/project/gzy8899/references/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.57.gtf"
