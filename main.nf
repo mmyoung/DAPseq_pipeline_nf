@@ -78,11 +78,12 @@ process SAMPLE_REPORTING{
         sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [[ -n "\${ID}" ]] ;do
             raw_num=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt |grep "Total reads processed:"|sed s/" "//g|cut -d ":" -f 2`
             peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | wc -l `
+            min5fold_peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | awk '\$7>5{print \$0}'| wc -l `
 
             mapped_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 3`
             FRiP_score=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 4`
 
-            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${peak_num}\t\${FRiP_score}\n"
+            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${peak_num}\t\${min5fold_peak_num}\t\${FRiP_score}\n"
         done >read_peak.num.summary
 
         mkdir -p ${params.output_dir}/report/
@@ -92,7 +93,7 @@ process SAMPLE_REPORTING{
                                     output_file='report.html', 
                                     params=list(summary_table='${params.output_dir}/report/read_peak.num.summary',parent_path='${output_dir}'))"
 
-        cp report.html ${params.output_dir}/report/
+        mv ${projectDir}/bin/report.html ${params.output_dir}/report/
         """
 
 }

@@ -17,7 +17,7 @@ library(base64enc)
 
 # Load the data
 sample_data <- read.table(params$summary_table,sep="\t",header=F)
-colnames(sample_data) <- c("sample","raw read pairs#","mapped reads#","peak#","FRiP_score")
+colnames(sample_data) <- c("sample","raw read pairs#","mapped reads#","peak#","min5fold peak#","FRiP_score")
 
 
 # Define the image directory
@@ -41,6 +41,7 @@ sample_data$motif <- sapply(sample_data$Image_Path, function(img) {
 
 sample_data$`mapped reads#` <- format(as.numeric(sample_data$`mapped reads#`),big.mark=",")
 sample_data$`peak#` <- format(as.numeric(sample_data$`peak#`),big.mark=",")
+sample_data$`min5fold peak#` <- format(as.numeric(sample_data$`min5fold peak#`),big.mark=",")
 
 sample_data <- sample_data %>% select(-Image_Path)
 
