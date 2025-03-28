@@ -79,11 +79,13 @@ process SAMPLE_REPORTING{
             raw_num=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt |grep "Total reads processed:"|sed s/" "//g|cut -d ":" -f 2`
             peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | wc -l `
             min5fold_peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | awk '\$7>5{print \$0}'| wc -l `
+            mapping_ratio=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt | grep "overall alignment rate"| sed s/"overall alignment rate"//g`
 
             mapped_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 3`
+            peak_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 2`
             FRiP_score=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 4`
 
-            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${peak_num}\t\${min5fold_peak_num}\t\${FRiP_score}\n"
+            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${mapping_ratio}\t\${peak_num}\t\${min5fold_peak_num}\t\${peak_reads}\t\${FRiP_score}\n"
         done >read_peak.num.summary
 
         mkdir -p ${params.output_dir}/report/

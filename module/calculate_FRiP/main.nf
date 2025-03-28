@@ -22,7 +22,7 @@ process CAL_FRIP {
     if [ -s ${peak} ]; then
 
         # Count reads in the peaks
-        peak_read=\$(samtools view -c -L ${peak} ${bam})
+        peak_read=\$(samtools view -c -L <(cat ${peak}|awk '\$7>5{print \$0}') ${bam})
 
         # Count total reads in the BAM file
         total_read=\$(samtools view -c ${bam})
