@@ -20,12 +20,6 @@ process TRIMGALORE {
         if (cores > 4) cores = 4
     }
 
-    // Clipping presets have to be evaluated in the context of SE/PE
-    def c_r1   = params.prime5_trim_len > 0             ? "--clip_r1 ${params.prime5_trim_len}"                         : ''
-    def c_r2   = params.prime5_trim_len > 0             ? "--clip_r2 ${params.prime5_trim_len}"                         : ''
-    def tpc_r1 = params.prime3_trim_len > 0 ? "--three_prime_clip_r1 ${params.prime3_trim_len}"             : ''
-    def tpc_r2 = params.prime3_trim_len > 0 ? "--three_prime_clip_r2 ${params.prime3_trim_len}"             : ''
-
     def prefix = "${meta.id}"
     // print"${meta.single_end}"
     if (meta.single_end) {
@@ -35,8 +29,7 @@ process TRIMGALORE {
         --cores $cores \\
         --gzip \\
         --basename $prefix \\
-        $c_r1 \\
-        $tpc_r1 \\
+        --quality 20 \\
         $reads
         """
     } else {
@@ -47,10 +40,7 @@ process TRIMGALORE {
             --paired \\
             --gzip \\
             --basename $prefix \\
-            $c_r1 \\
-            $c_r2 \\
-            $tpc_r1 \\
-            $tpc_r2 \\
+            --quality 20 \\
             ${reads[0]} \\
             ${reads[1]}
         """

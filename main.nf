@@ -28,7 +28,6 @@ if (params.help) {
     exit 1
 }
 
-
 include {INPUT_CHECK} from "./subworkflow/input_check"
 include {TRIMGALORE} from "./module/Trimgalore"
 include {FASTQC} from "./module/Fastqc"
@@ -56,7 +55,6 @@ process COMPLETION_CHECK {
 }
 
 process SAMPLE_REPORTING{
-
     conda  "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
     tag "report"
     publishDir "${params.output_dir}/report", mode: 'copy'
@@ -71,21 +69,21 @@ process SAMPLE_REPORTING{
         path("report.html")
 
     script:
-
         def reportPath = "${projectDir}/bin/report.Rmd"
 
         """
-        sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [[ -n "\${ID}" ]] ;do
+            sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [[ -n "\${ID}" ]] ;do
             raw_num=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt |grep "Total reads processed:"|sed s/" "//g|cut -d ":" -f 2`
             peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | wc -l `
             min5fold_peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | awk '\$7>5{print \$0}'| wc -l `
+            max_peak_foldch=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | awk '\$7>max{max=\$7}END{print max}'`
             mapping_ratio=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt | grep "overall alignment rate"| sed s/"overall alignment rate"//g`
 
             mapped_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 3`
             peak_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 2`
             FRiP_score=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 4`
 
-            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${mapping_ratio}\t\${peak_num}\t\${min5fold_peak_num}\t\${peak_reads}\t\${FRiP_score}\n"
+            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${mapping_ratio}\t\${peak_num}\t\${min5fold_peak_num}\t\${max_peak_foldch}\t\${peak_reads}\t\${FRiP_score}\n"
         done >read_peak.num.summary
 
         mkdir -p ${params.output_dir}/report/
@@ -97,60 +95,108 @@ process SAMPLE_REPORTING{
 
         mv ${projectDir}/bin/report.html ${params.output_dir}/report/
         """
-
 }
 
-
 workflow {
-
     INPUT_CHECK(params.fq_sheet)
     
     TRIMGALORE(INPUT_CHECK.out.reads)
     BOWTIE2MAP(TRIMGALORE.out.reads)
-//  MARK_DUPLICATES(BOWTIE2MAP.out.bam)
-    
     FASTQC(TRIMGALORE.out.reads)
-//  MARK_DUPLICATES
+    
     BOWTIE2MAP
         .out
         .bam
-//      .join(MARK_DUPLICATES.out.bai, by: [0])
         .join(BOWTIE2MAP.out.bai, by: [0])
         .set {ch_genome_bam_bai}
-
-//    ch_genome_bam_bai|(BAM2BW & COVERAGE)
 
     BAM2BW(ch_genome_bam_bai)
     COVERAGE(ch_genome_bam_bai)
 
-//    ch_genome_bam_bai
-//       .combine(ch_genome_bam_bai)
-//        .map { 
-//            meta1, bam1, bai1, meta2, bam2, bai2 ->
-//                meta1.control == meta2.id ? [ meta1, [ bam1, bam2 ], [ bai1, bai2 ] ] : [ meta1, [ bam1, null ], [ bai1, null ] ] 
-//        }
-//        .set { ch_ip_control_bam_bai }
-
-//    ch_genome_bam_bai.view()
-
+    // CORRECTED LOGIC FOR YOUR SAMPLE STRUCTURE
+    
+    // Identify control samples (these are the samples that serve as controls for others)
+    // Based on your CSV: the last 3 samples that have empty control field but are referenced by others
+    def control_sample_names = [
+        'multiDAP_At_seedling_shoot_Halo_beads',
+        'multiDAP_At_seedling_root_Halo_beads', 
+        'multi_ampDAP_At_Halo_beads'
+    ]
+    
+    // Split all BAM samples into controls and treatments
     ch_genome_bam_bai
-        .map { 
-            meta, bam, bai -> 
-                [ meta , bam, bai ] 
+        .branch { meta, bam, bai ->
+            // Control samples: those that are referenced as controls by other samples
+            controls: control_sample_names.contains(meta.id)
+            // Treatment samples: all others (both with and without controls)
+            treatments: !control_sample_names.contains(meta.id)
         }
+        .set { sample_branches }
+
+    // Debug: Check the split
+    sample_branches.controls.count().view { "Control samples: $it" }
+    sample_branches.treatments.count().view { "Treatment samples: $it" }
+
+    // Prepare available controls (keyed by sample ID)
+    sample_branches.controls
+        .map { meta, bam, bai -> [ meta.id, bam, bai ] }
+        .set { available_controls }
+
+    available_controls.view { "Available control: $it" }
+
+    // Process treatment samples
+    sample_branches.treatments
+        .branch { meta, bam, bai ->
+            // Samples that need a control (have non-empty control field)
+            with_control: meta.control && meta.control != ''
+            // Samples that don't need a control (empty control field)
+            without_control: !meta.control || meta.control == ''
+        }
+        .set { treatment_branches }
+
+    // Debug: Check treatment split
+    treatment_branches.with_control.count().view { "Treatments with controls: $it" }
+    treatment_branches.without_control.count().view { "Treatments without controls: $it" }
+
+    // For treatments WITH controls: join with their specified control
+    treatment_branches.with_control
+        .map { meta, bam, bai -> [ meta.control, meta, bam, bai ] }  // Key by required control ID
+        .join(available_controls, by: 0, remainder: true)  // Join with available controls
+        .map { control_id, meta, treatment_bam, treatment_bai, control_bam, control_bai ->
+            [ meta, treatment_bam, control_bam ?: null ]
+        }
+        .set { treatments_with_controls }
+
+    // For treatments WITHOUT controls: use null as control
+    treatment_branches.without_control
+        .map { meta, bam, bai -> [ meta, bam, null ] }
+        .set { treatments_without_controls }
+
+    // Combine both types of treatments
+    treatments_with_controls.mix(treatments_without_controls)
         .set { ch_ip_control_bam }
 
-//    ch_ip_control_bam.view()
+    // Debug: Check final MACS2 input
+    ch_ip_control_bam.count().view { "Total samples for MACS2: $it" }
+    ch_ip_control_bam.view { "MACS2 input: ${it[0].id} (control: ${it[2] ? 'YES' : 'NO'})" }
 
-// call peaks with macs
+    // Call peaks with MACS - should now process ~61 samples (22 without controls + 39 with controls)
     MACS2_CALLPEAK(ch_ip_control_bam, params.gsize)
-// calculate FRiP score based on the peak coverage 
-    CAL_FRIP(MACS2_CALLPEAK.out.peak,BOWTIE2MAP.out.bam)
-// annotate peak distribution using HOMER
-    HOMER_ANNOTATEPEAKS(MACS2_CALLPEAK.out.peak, params.fasta, params.gtf)
-// analyze motif of peaks using MEME suite
-    MEME_MOTIF(MACS2_CALLPEAK.out.peak, params.fasta)
-// Count the number of samples and wait for all processes to complete
+    
+    // Remove any duplicates from peak channel (precautionary)
+    MACS2_CALLPEAK.out.peak
+        .unique { sample_id, peak_file -> sample_id }
+        .set { unique_peak_channel }
+    
+    // Debug: Check final peak channel
+    unique_peak_channel.count().view { "Total unique peaks: $it" }
+    
+    // Use the cleaned channel for all downstream processes
+    CAL_FRIP(unique_peak_channel, BOWTIE2MAP.out.bam)
+    HOMER_ANNOTATEPEAKS(unique_peak_channel, params.fasta, params.gtf)
+    MEME_MOTIF(unique_peak_channel, params.fasta)
+    
+    // Count the number of samples and wait for all processes to complete
     CAL_FRIP.out.txt
         .count()
         .set { sample_count }
@@ -171,4 +217,3 @@ workflow.onComplete {
     log.info "Execution status: ${ workflow.success ? 'OK' : 'failed' }"
     log.info "Execution duration: $workflow.duration"
 }
-

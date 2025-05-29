@@ -17,7 +17,7 @@ library(base64enc)
 
 # Load the data
 sample_data <- read.table(params$summary_table,sep="\t",header=F)
-colnames(sample_data) <- c("sample","raw read pairs#","mapped reads#","mapping ratio%","peak#","min5fold peak#","peak reads#","FRiP_score")
+colnames(sample_data) <- c("sample","raw read pairs#","mapped reads#","mapping ratio%","peak#","min5fold peak#","max peak score","peak reads#","FRiP_score")
 
 
 # Define the image directory
