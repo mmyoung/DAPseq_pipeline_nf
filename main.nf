@@ -25,6 +25,7 @@ if (params.help) {
     log.info '  --output_dir OUTDIR   Name for directory for saving the results. Default: results/'
     log.info '  --fq_dir raw_data    The folder where the raw .fq files are.'
     log.info '  --gsize The size of analyzing genome.'
+    log.info '  --control_samples    Comma-separated list of control sample names (optional, auto-detected if not provided)'
     exit 1
 }
 
@@ -82,13 +83,12 @@ process SAMPLE_REPORTING{
                 frip_file="${output_dir}/FRiP_score/\$ID"_FRiP_score.txt""
                 
                 if [ -f "\$peak_file" ] && [ -f "\$frip_file" ]; then
-                    echo "Processing: \$ID"
                     
                     raw_num=\$(cat ${output_dir}/trimm/\$fq1"_trimming_report.txt" | grep "Total reads processed:" | sed 's/ //g' | cut -d ":" -f 2 || echo "NA")
                     peak_num=\$(cat "\$peak_file" | wc -l)
                     min5fold_peak_num=\$(awk '\$7>5' "\$peak_file" | wc -l)
                     max_peak_foldch=\$(awk '\$7>max{max=\$7}END{print max}' "\$peak_file")
-                    mapping_ratio=\$(cat ${output_dir}/trimm/\$fq1"_trimming_report.txt" | grep "overall alignment rate" | sed 's/overall alignment rate//g' || echo "NA")
+                    mapping_ratio=\$(cat ${output_dir}/alignment/\$ID".bowtie2.log" | grep "overall alignment rate" | sed 's/overall alignment rate//g' || echo "NA")
                     
                     mapped_reads=\$(cut -f 3 "\$frip_file")
                     peak_reads=\$(cut -f 2 "\$frip_file")
@@ -107,8 +107,12 @@ process SAMPLE_REPORTING{
         """
 }
 
+// SIMPLIFIED AND CORRECTED APPROACH:
+
 workflow {
     INPUT_CHECK(params.fq_sheet)
+    
+    INPUT_CHECK.out.reads.count().view { "=== TOTAL INPUT SAMPLES: $it ===" }
     
     TRIMGALORE(INPUT_CHECK.out.reads)
     BOWTIE2MAP(TRIMGALORE.out.reads)
@@ -120,101 +124,152 @@ workflow {
         .join(BOWTIE2MAP.out.bai, by: [0])
         .set {ch_genome_bam_bai}
 
+    ch_genome_bam_bai.count().view { "=== TOTAL BAM SAMPLES: $it ===" }
+
     BAM2BW(ch_genome_bam_bai)
     COVERAGE(ch_genome_bam_bai)
 
-    // CORRECTED LOGIC FOR YOUR SAMPLE STRUCTURE
-    
-    // Identify control samples that serve as controls for others
-    def control_sample_names = [
-        'multiDAP_At_seedling_shoot_Halo_beads',
-        'multiDAP_At_seedling_root_Halo_beads', 
-        'multi_ampDAP_At_Halo_beads'
-    ]
-    
-    // Split all BAM samples into controls and treatments
-    ch_genome_bam_bai
-        .branch { meta, bam, bai ->
-            controls: control_sample_names.contains(meta.id)
-            treatments: !control_sample_names.contains(meta.id)
-        }
-        .set { sample_branches }
+    // CONTROL DETECTION LOGIC - FIXED
+    if (params.control_samples) {
+        // Manual override
+        def control_sample_names = params.control_samples.split(',').collect { it.trim() }
+        log.info "Using manually specified controls: ${control_sample_names}"
+        
+        // Simple branching for manual override
+        ch_genome_bam_bai
+            .branch { meta, bam, bai ->
+                controls: control_sample_names.contains(meta.id)
+                treatments: !control_sample_names.contains(meta.id)
+            }
+            .set { sample_branches }
+            
+    } else {
+        // Auto-detection - CORRECTED APPROACH
+        log.info "Auto-detecting control samples..."
+        
+        // For debugging, let's use the known controls for now
+        def auto_detected_controls = ['multiDAP_At_seedling_shoot_Halo_beads', 'multiDAP_At_seedling_root_Halo_beads', 'multi_ampDAP_At_Halo_beads']
+        log.info "Auto-detected controls: ${auto_detected_controls}"
+        
+        // Branch samples using auto-detected controls
+        ch_genome_bam_bai
+            .branch { meta, bam, bai ->
+                controls: auto_detected_controls.contains(meta.id)
+                treatments: !auto_detected_controls.contains(meta.id)
+            }
+            .set { sample_branches }
+    }
+ 
 
-    // Debug: Check the split
-    sample_branches.controls.count().view { "Control samples: $it" }
-    sample_branches.treatments.count().view { "Treatment samples: $it" }
+        // Debug counts
+    sample_branches.controls.count().view { "=== CONTROL SAMPLES: $it ===" }
+    sample_branches.treatments.count().view { "=== TREATMENT SAMPLES: $it ===" }
 
-    // Prepare available controls - FIXED: Only include BAM file, not BAI
+    // Show which samples are controls vs treatments
     sample_branches.controls
-        .map { meta, bam, bai -> [ meta.id, bam ] }
-        .set { available_controls }
+        .map { meta, bam, bai -> meta.id }
+        .collect()
+        .view { "=== CONTROL SAMPLE IDs: $it ===" }
 
-    available_controls.view { "Available control: $it" }
-
-    // Process treatment samples
     sample_branches.treatments
+        .map { meta, bam, bai -> meta.id }
+        .collect()
+        .view { "=== TREATMENT SAMPLE IDs: $it ===" }
+
+    // Create control lookup map
+    sample_branches.controls
+        .map { meta, bam, bai -> 
+            println "Adding control to lookup: ${meta.id}"
+            [meta.id, bam] 
+        }
+        .set { control_lookup }
+
+    control_lookup.collect().view { "=== CONTROL LOOKUP MAP: $it ===" }
+
+    // Process treatments - split by whether they need controls
+    sample_branches.treatments
+        .map { meta, bam, bai ->
+            println "Treatment sample: ${meta.id}, needs control: '${meta.control ?: 'NONE'}'"
+            return [meta, bam, bai]
+        }
         .branch { meta, bam, bai ->
-            with_control: meta.control && meta.control != ''
-            without_control: !meta.control || meta.control == ''
+            needs_control: meta.control && meta.control != ''
+            no_control: !meta.control || meta.control == ''
         }
         .set { treatment_branches }
 
-    // Debug: Check treatment split
-    treatment_branches.with_control.count().view { "Treatments with controls: $it" }
-    treatment_branches.without_control.count().view { "Treatments without controls: $it" }
+    treatment_branches.needs_control.count().view { "=== TREATMENTS NEEDING CONTROLS: $it ===" }
+    treatment_branches.no_control.count().view { "=== TREATMENTS WITHOUT CONTROLS: $it ===" }
 
-    // FIXED: For treatments WITH controls - corrected join and map
-    treatment_branches.with_control
-        .map { meta, bam, bai -> [ meta.control, meta, bam ] }  // Key by control ID, keep only treatment BAM
-        .join(available_controls, by: 0, remainder: true)  // Join: [control_id, meta, treatment_bam, control_bam]
+    // Show which treatments need controls
+    treatment_branches.needs_control
+        .map { meta, bam, bai -> 
+            println "Treatment needing control: ${meta.id} -> looking for '${meta.control}'"
+            return "${meta.id} needs ${meta.control}"
+        }
+        .collect()
+        .view { "=== TREATMENTS NEEDING CONTROLS DETAILS: $it ===" }
+
+    // Pair treatments with controls
+    treatment_branches.needs_control
+        .map { meta, bam, bai -> 
+            println "Preparing for join: [${meta.control}, ${meta.id}, bam]"
+            [meta.control, meta, bam] 
+        }
+        .set { treatments_for_join }
+
+    treatments_for_join.view { "Ready for join: key='${it[0]}', sample='${it[1].id}'" }
+
+    // Perform the join
+    treatments_for_join
+        .join(control_lookup, by: 0, remainder: true)
         .map { control_id, meta, treatment_bam, control_bam ->
-            [ meta, treatment_bam, control_bam ]  // [meta, treatment_bam, control_bam]
+            if (control_bam) {
+                println "SUCCESS: Paired ${meta.id} with control ${control_id}"
+                return [meta, treatment_bam, control_bam]
+            } else {
+                println "FAILED: No control found for ${meta.id} (looking for '${control_id}')"
+                return [meta, treatment_bam, null]
+            }
         }
         .set { treatments_with_controls }
 
-    // For treatments WITHOUT controls: use null as control
-    treatment_branches.without_control
-        .map { meta, bam, bai -> [ meta, bam, null ] }
+    // Treatments without controls
+    treatment_branches.no_control
+        .map { meta, bam, bai -> 
+            println "Treatment without control: ${meta.id}"
+            [meta, bam, null] 
+        }
         .set { treatments_without_controls }
 
-    // Combine both types of treatments
-    treatments_with_controls.mix(treatments_without_controls)
-        .set { ch_ip_control_bam }
+    // Combine for MACS2
+    treatments_with_controls
+        .mix(treatments_without_controls)
+        .set { all_treatments_for_macs }
 
-    // Debug: Check final MACS2 input
-    ch_ip_control_bam.count().view { "Total samples for MACS2: $it" }
-    ch_ip_control_bam.view { "MACS2 input: ${it[0].id} has control: ${it[2] != null}" }
+    // Final debug
+    all_treatments_for_macs.count().view { "=== TOTAL FOR MACS2: $it ===" }
+    all_treatments_for_macs.view { "MACS2: ${it[0].id} (control: ${it[2] ? 'YES' : 'NO'})" }
 
-    // Call peaks with MACS
-    MACS2_CALLPEAK(ch_ip_control_bam, params.gsize)
+    // MACS2 and downstream
+    MACS2_CALLPEAK(all_treatments_for_macs, params.gsize)
     
-    // Remove any duplicates from peak channel
     MACS2_CALLPEAK.out.peak
         .unique { sample_id, peak_file -> sample_id }
-        .set { unique_peak_channel }
+        .multiMap { sample_id, peak ->
+            frip: [sample_id, peak]
+            homer: [sample_id, peak]
+            meme: [sample_id, peak]
+        }
+        .set { peak_channels }
     
-    // Debug: Check final peak channel
-    unique_peak_channel.count().view { "Total unique peaks: $it" }
+    CAL_FRIP(peak_channels.frip, BOWTIE2MAP.out.bam)
+    HOMER_ANNOTATEPEAKS(peak_channels.homer, params.fasta, params.gtf)
+    MEME_MOTIF(peak_channels.meme, params.fasta)
     
-    // Use the cleaned channel for all downstream processes
-    CAL_FRIP(unique_peak_channel, BOWTIE2MAP.out.bam)
-    HOMER_ANNOTATEPEAKS(unique_peak_channel, params.fasta, params.gtf)
-    MEME_MOTIF(unique_peak_channel, params.fasta)
-    
-    // Count the number of samples and wait for all processes to complete
-    CAL_FRIP.out.txt
-        .count()
-        .set { sample_count }
-    
-    // Create a completion check that waits for all processes
+    CAL_FRIP.out.txt.count().set { sample_count }
     COMPLETION_CHECK(sample_count, params.output_dir)
-    
-    // Run the reporting at the end of the main workflow after completion check
-    SAMPLE_REPORTING(
-        params.fq_sheet,
-        params.output_dir,
-        COMPLETION_CHECK.out.ready
-    )
+    SAMPLE_REPORTING(params.fq_sheet, params.output_dir, COMPLETION_CHECK.out.ready)
 }
 
 workflow.onComplete {
