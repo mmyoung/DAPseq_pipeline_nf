@@ -72,28 +72,38 @@ process SAMPLE_REPORTING{
         def reportPath = "${projectDir}/bin/report.Rmd"
 
         """
-            sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [[ -n "\${ID}" ]] ;do
-            raw_num=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt |grep "Total reads processed:"|sed s/" "//g|cut -d ":" -f 2`
-            peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | wc -l `
-            min5fold_peak_num=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | awk '\$7>5{print \$0}'| wc -l `
-            max_peak_foldch=`cat ${output_dir}/macs3_output/\${ID}_peaks.narrowPeak | awk '\$7>max{max=\$7}END{print max}'`
-            mapping_ratio=`cat ${output_dir}/trimm/\${fq1}_trimming_report.txt | grep "overall alignment rate"| sed s/"overall alignment rate"//g`
+            echo -e "Sample_ID\\tRaw_reads\\tMapped_reads\\tMapping_ratio\\tPeak_number\\tMin5fold_peaks\\tMax_peak_foldchange\\tPeak_reads\\tFRiP_score" > read_peak.num.summary
+            
+            sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _; do
+                [ -z "\$ID" ] && continue
+                
+                # Check if peak file exists
+                peak_file="${output_dir}/macs3_output/\$ID"_peaks.narrowPeak""
+                frip_file="${output_dir}/FRiP_score/\$ID"_FRiP_score.txt""
+                
+                if [ -f "\$peak_file" ] && [ -f "\$frip_file" ]; then
+                    echo "Processing: \$ID"
+                    
+                    raw_num=\$(cat ${output_dir}/trimm/\$fq1"_trimming_report.txt" | grep "Total reads processed:" | sed 's/ //g' | cut -d ":" -f 2 || echo "NA")
+                    peak_num=\$(cat "\$peak_file" | wc -l)
+                    min5fold_peak_num=\$(awk '\$7>5' "\$peak_file" | wc -l)
+                    max_peak_foldch=\$(awk '\$7>max{max=\$7}END{print max}' "\$peak_file")
+                    mapping_ratio=\$(cat ${output_dir}/trimm/\$fq1"_trimming_report.txt" | grep "overall alignment rate" | sed 's/overall alignment rate//g' || echo "NA")
+                    
+                    mapped_reads=\$(cut -f 3 "\$frip_file")
+                    peak_reads=\$(cut -f 2 "\$frip_file")
+                    FRiP_score=\$(cut -f 4 "\$frip_file")
+                    
+                    printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n" "\$ID" "\$raw_num" "\$mapped_reads" "\$mapping_ratio" "\$peak_num" "\$min5fold_peak_num" "\$max_peak_foldch" "\$peak_reads" "\$FRiP_score"
+                fi
+            done >> read_peak.num.summary
 
-            mapped_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 3`
-            peak_reads=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 2`
-            FRiP_score=`cat ${output_dir}/FRiP_score/\${ID}_FRiP_score.txt | cut -f 4`
+            mkdir -p ${params.output_dir}/report/
+            cp read_peak.num.summary ${params.output_dir}/report/
 
-            printf "\${ID}\t\${raw_num}\t\${mapped_reads}\t\${mapping_ratio}\t\${peak_num}\t\${min5fold_peak_num}\t\${max_peak_foldch}\t\${peak_reads}\t\${FRiP_score}\n"
-        done >read_peak.num.summary
+            Rscript -e "rmarkdown::render(input = '${reportPath}', output_file='report.html', params=list(summary_table='${params.output_dir}/report/read_peak.num.summary',parent_path='${output_dir}'))"
 
-        mkdir -p ${params.output_dir}/report/
-        cp read_peak.num.summary ${params.output_dir}/report/
-
-        Rscript -e "rmarkdown::render(input = '${reportPath}', 
-                                    output_file='report.html', 
-                                    params=list(summary_table='${params.output_dir}/report/read_peak.num.summary',parent_path='${output_dir}'))"
-
-        mv ${projectDir}/bin/report.html ${params.output_dir}/report/
+            mv ${projectDir}/bin/report.html ${params.output_dir}/report/
         """
 }
 
@@ -115,8 +125,7 @@ workflow {
 
     // CORRECTED LOGIC FOR YOUR SAMPLE STRUCTURE
     
-    // Identify control samples (these are the samples that serve as controls for others)
-    // Based on your CSV: the last 3 samples that have empty control field but are referenced by others
+    // Identify control samples that serve as controls for others
     def control_sample_names = [
         'multiDAP_At_seedling_shoot_Halo_beads',
         'multiDAP_At_seedling_root_Halo_beads', 
@@ -126,9 +135,7 @@ workflow {
     // Split all BAM samples into controls and treatments
     ch_genome_bam_bai
         .branch { meta, bam, bai ->
-            // Control samples: those that are referenced as controls by other samples
             controls: control_sample_names.contains(meta.id)
-            // Treatment samples: all others (both with and without controls)
             treatments: !control_sample_names.contains(meta.id)
         }
         .set { sample_branches }
@@ -137,9 +144,9 @@ workflow {
     sample_branches.controls.count().view { "Control samples: $it" }
     sample_branches.treatments.count().view { "Treatment samples: $it" }
 
-    // Prepare available controls (keyed by sample ID)
+    // Prepare available controls - FIXED: Only include BAM file, not BAI
     sample_branches.controls
-        .map { meta, bam, bai -> [ meta.id, bam, bai ] }
+        .map { meta, bam, bai -> [ meta.id, bam ] }
         .set { available_controls }
 
     available_controls.view { "Available control: $it" }
@@ -147,9 +154,7 @@ workflow {
     // Process treatment samples
     sample_branches.treatments
         .branch { meta, bam, bai ->
-            // Samples that need a control (have non-empty control field)
             with_control: meta.control && meta.control != ''
-            // Samples that don't need a control (empty control field)
             without_control: !meta.control || meta.control == ''
         }
         .set { treatment_branches }
@@ -158,12 +163,12 @@ workflow {
     treatment_branches.with_control.count().view { "Treatments with controls: $it" }
     treatment_branches.without_control.count().view { "Treatments without controls: $it" }
 
-    // For treatments WITH controls: join with their specified control
+    // FIXED: For treatments WITH controls - corrected join and map
     treatment_branches.with_control
-        .map { meta, bam, bai -> [ meta.control, meta, bam, bai ] }  // Key by required control ID
-        .join(available_controls, by: 0, remainder: true)  // Join with available controls
-        .map { control_id, meta, treatment_bam, treatment_bai, control_bam, control_bai ->
-            [ meta, treatment_bam, control_bam ?: null ]
+        .map { meta, bam, bai -> [ meta.control, meta, bam ] }  // Key by control ID, keep only treatment BAM
+        .join(available_controls, by: 0, remainder: true)  // Join: [control_id, meta, treatment_bam, control_bam]
+        .map { control_id, meta, treatment_bam, control_bam ->
+            [ meta, treatment_bam, control_bam ]  // [meta, treatment_bam, control_bam]
         }
         .set { treatments_with_controls }
 
@@ -178,12 +183,12 @@ workflow {
 
     // Debug: Check final MACS2 input
     ch_ip_control_bam.count().view { "Total samples for MACS2: $it" }
-    ch_ip_control_bam.view { "MACS2 input: ${it[0].id} (control: ${it[2] ? 'YES' : 'NO'})" }
+    ch_ip_control_bam.view { "MACS2 input: ${it[0].id} has control: ${it[2] != null}" }
 
-    // Call peaks with MACS - should now process ~61 samples (22 without controls + 39 with controls)
+    // Call peaks with MACS
     MACS2_CALLPEAK(ch_ip_control_bam, params.gsize)
     
-    // Remove any duplicates from peak channel (precautionary)
+    // Remove any duplicates from peak channel
     MACS2_CALLPEAK.out.peak
         .unique { sample_id, peak_file -> sample_id }
         .set { unique_peak_channel }
