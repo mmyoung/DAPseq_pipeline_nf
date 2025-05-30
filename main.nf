@@ -129,131 +129,74 @@ workflow {
     BAM2BW(ch_genome_bam_bai)
     COVERAGE(ch_genome_bam_bai)
 
-    // CONTROL DETECTION LOGIC - FIXED
-    if (params.control_samples) {
-        // Manual override
-        def control_sample_names = params.control_samples.split(',').collect { it.trim() }
-        log.info "Using manually specified controls: ${control_sample_names}"
-        
-        // Simple branching for manual override
-        ch_genome_bam_bai
-            .branch { meta, bam, bai ->
-                controls: control_sample_names.contains(meta.id)
-                treatments: !control_sample_names.contains(meta.id)
-            }
-            .set { sample_branches }
-            
-    } else {
-        // Auto-detection - CORRECTED APPROACH
-        log.info "Auto-detecting control samples..."
-        
-        // For debugging, let's use the known controls for now
-        def auto_detected_controls = ['multiDAP_At_seedling_shoot_Halo_beads', 'multiDAP_At_seedling_root_Halo_beads', 'multi_ampDAP_At_Halo_beads']
-        log.info "Auto-detected controls: ${auto_detected_controls}"
-        
-        // Branch samples using auto-detected controls
-        ch_genome_bam_bai
-            .branch { meta, bam, bai ->
-                controls: auto_detected_controls.contains(meta.id)
-                treatments: !auto_detected_controls.contains(meta.id)
-            }
-            .set { sample_branches }
-    }
- 
+        // FIXED CONTROL DETECTION - Simple and reliable
 
-        // Debug counts
+    def known_controls = params.control_samples.split(',').collect { it.trim() }
+    log.info "Using known control samples: ${known_controls}"
+
+    // Simple branching - no complex channel operations
+    ch_genome_bam_bai
+        .branch { meta, bam, bai ->
+            controls: known_controls.contains(meta.id)
+            treatments: !known_controls.contains(meta.id)
+        }
+        .set { sample_branches }
+
+        // Debug the basic split
     sample_branches.controls.count().view { "=== CONTROL SAMPLES: $it ===" }
     sample_branches.treatments.count().view { "=== TREATMENT SAMPLES: $it ===" }
 
-    // Show which samples are controls vs treatments
-    sample_branches.controls
-        .map { meta, bam, bai -> meta.id }
-        .collect()
-        .view { "=== CONTROL SAMPLE IDs: $it ===" }
-
-    sample_branches.treatments
-        .map { meta, bam, bai -> meta.id }
-        .collect()
-        .view { "=== TREATMENT SAMPLE IDs: $it ===" }
-
-    // Create control lookup map
+    // SIMPLE CONTROL LOOKUP - No complex operations
     sample_branches.controls
         .map { meta, bam, bai -> 
-            println "Adding control to lookup: ${meta.id}"
-            [meta.id, bam] 
+            println "CONTROL AVAILABLE: ${meta.id} -> ${bam}"
+            return [ meta.id, [bam], [bai] ]
         }
         .set { control_lookup }
 
-    control_lookup.collect().view { "=== CONTROL LOOKUP MAP: $it ===" }
-
-    // Process treatments - split by whether they need controls
+    // Process treatments
     sample_branches.treatments
-        .map { meta, bam, bai ->
-            println "Treatment sample: ${meta.id}, needs control: '${meta.control ?: 'NONE'}'"
-            return [meta, bam, bai]
-        }
         .branch { meta, bam, bai ->
-            needs_control: meta.control && meta.control != ''
-            no_control: !meta.control || meta.control == ''
+            needs_control: meta.control && meta.control.trim() != ''
+            no_control: !meta.control || meta.control.trim() == ''
         }
         .set { treatment_branches }
 
     treatment_branches.needs_control.count().view { "=== TREATMENTS NEEDING CONTROLS: $it ===" }
     treatment_branches.no_control.count().view { "=== TREATMENTS WITHOUT CONTROLS: $it ===" }
 
-    // Show which treatments need controls
-    treatment_branches.needs_control
-        .map { meta, bam, bai -> 
-            println "Treatment needing control: ${meta.id} -> looking for '${meta.control}'"
-            return "${meta.id} needs ${meta.control}"
-        }
-        .collect()
-        .view { "=== TREATMENTS NEEDING CONTROLS DETAILS: $it ===" }
-
-    // Pair treatments with controls
-    treatment_branches.needs_control
-        .map { meta, bam, bai -> 
-            println "Preparing for join: [${meta.control}, ${meta.id}, bam]"
-            [meta.control, meta, bam] 
-        }
-        .set { treatments_for_join }
-
-    treatments_for_join.view { "Ready for join: key='${it[0]}', sample='${it[1].id}'" }
-
     // Perform the join
-    treatments_for_join
-        .join(control_lookup, by: 0, remainder: true)
-        .map { control_id, meta, treatment_bam, control_bam ->
-            if (control_bam) {
-                println "SUCCESS: Paired ${meta.id} with control ${control_id}"
-                return [meta, treatment_bam, control_bam]
-            } else {
-                println "FAILED: No control found for ${meta.id} (looking for '${control_id}')"
-                return [meta, treatment_bam, null]
-            }
-        }
+    treatment_branches.needs_control
+        .map { meta, bam, bai ->
+                meta.control ? [ meta.control, meta, [ bam ], [ bai ] ] : null}
+        .combine(control_lookup, by: 0)
+        .map { it -> [ it[1] , it[2] + it[4], it[3] + it[5] ] }
         .set { treatments_with_controls }
 
-    // Treatments without controls
+    // For treatments without controls
     treatment_branches.no_control
         .map { meta, bam, bai -> 
-            println "Treatment without control: ${meta.id}"
-            [meta, bam, null] 
+            return [meta, [bam, null], [bai, null]] 
         }
         .set { treatments_without_controls }
 
-    // Combine for MACS2
+    // Combine all treatments for MACS2
     treatments_with_controls
         .mix(treatments_without_controls)
-        .set { all_treatments_for_macs }
+        .map {
+            meta, bams, bais ->
+                [ meta , bams[0], bams[1] ]
+        }
+        .set { macs_input_ready }
 
     // Final debug
-    all_treatments_for_macs.count().view { "=== TOTAL FOR MACS2: $it ===" }
-    all_treatments_for_macs.view { "MACS2: ${it[0].id} (control: ${it[2] ? 'YES' : 'NO'})" }
+    macs_input_ready.count().view { "=== TOTAL FOR MACS2: $it ===" }
+
 
     // MACS2 and downstream
-    MACS2_CALLPEAK(all_treatments_for_macs, params.gsize)
-    
+    //MACS2_CALLPEAK(all_treatments_for_macs, params.gsize)
+    MACS2_CALLPEAK(macs_input_ready, params.gsize)
+
     MACS2_CALLPEAK.out.peak
         .unique { sample_id, peak_file -> sample_id }
         .multiMap { sample_id, peak ->

@@ -8,7 +8,8 @@ process MACS2_CALLPEAK {
     conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
 
     input:
-    tuple val(meta), path(ipbam), val(controlbam)
+    
+    tuple val(meta), path(ipbam, stageAs: 'treatment.bam'), val(control_path)
     val   macs2_gsize
 
     output:
@@ -19,12 +20,23 @@ process MACS2_CALLPEAK {
     tuple val(meta.id), path("*.bdg")       , optional: true, emit: bdg
 
     script:
-    // Handle case where controlbam is null
-    def control = controlbam ? "--control $controlbam" : ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def format = meta.single_end ? 'BAM' : 'BAMPE'
 
     """
+    echo "=== MACS2 Debug ==="
+    echo "Sample: ${meta.id}"
+    echo "Treatment: $ipbam" 
+    echo "Control: $control_path"
+
+    if [ "$control_path" != "null" ] && [ -f "$control_path" ]; then
+        echo "Using control: $control_path"
+        CONTROL_CMD="--control $control_path"
+    else
+        echo "No control used"
+        CONTROL_CMD=""
+    fi
+
     macs3 \\
         callpeak \\
         --gsize $macs2_gsize \\
@@ -33,6 +45,6 @@ process MACS2_CALLPEAK {
         --call-summits \\
         --keep-dup 1 \\
         --treatment $ipbam \\
-        $control
+        \$CONTROL_CMD
     """
-}
+}    
