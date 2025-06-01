@@ -197,20 +197,22 @@ workflow {
     //MACS2_CALLPEAK(all_treatments_for_macs, params.gsize)
     MACS2_CALLPEAK(macs_input_ready, params.gsize)
 
-    MACS2_CALLPEAK.out.peak
-        .unique { sample_id, peak_file -> sample_id }
-        .multiMap { sample_id, peak ->
-            frip: [sample_id, peak]
-            homer: [sample_id, peak]
-            meme: [sample_id, peak]
-        }
-        .set { peak_channels }
-    
-    CAL_FRIP(peak_channels.frip, BOWTIE2MAP.out.bam)
-    HOMER_ANNOTATEPEAKS(peak_channels.homer, params.fasta, params.gtf)
-    MEME_MOTIF(peak_channels.meme, params.fasta)
-    
+    // Extract the ID from the meta map to match MACS2's structure
+    bowtie_bam_for_frip = BOWTIE2MAP.out.bam
+        .map { meta, bam -> [meta.id, bam] }
+
+    // Now they both have [sample_id, file] structure
+    CAL_FRIP(
+        MACS2_CALLPEAK.out.peak.join(bowtie_bam_for_frip, by: 0)
+    )
     CAL_FRIP.out.txt.count().set { sample_count }
+
+    // annotate peak distribution using HOMER
+    HOMER_ANNOTATEPEAKS(MACS2_CALLPEAK.out.peak, params.fasta, params.gtf)
+    // analyze motif of peaks using MEME suite
+    MEME_MOTIF(MACS2_CALLPEAK.out.peak, params.fasta)
+
+
     COMPLETION_CHECK(sample_count, params.output_dir)
     SAMPLE_REPORTING(params.fq_sheet, params.output_dir, COMPLETION_CHECK.out.ready)
 }

@@ -9,8 +9,7 @@ process CAL_FRIP {
     // WARN: Version information not provided by tool on CLI. Please update version string below when bumping container versions.
 
     input:
-    tuple val(meta), path(peak)
-    tuple val(meta), path(bam)
+    tuple val(meta), path(peak), path(bam)
 
     output:
     path("*.txt"), optional: true, emit: txt
@@ -32,7 +31,7 @@ process CAL_FRIP {
         score=\$(awk "BEGIN {print \$peak_read / \$total_read}")
 
         # Output results to a text file
-        printf "%s\\t%d\\t%d\\t%.4f\\n" "${meta.id}" \$peak_read \$total_read \$score > ${meta.id}_FRiP_score.txt
+        printf "%s\\t%d\\t%d\\t%.4f\\n" "${meta}" \$peak_read \$total_read \$score > ${meta}_FRiP_score.txt
 
     fi
     """
