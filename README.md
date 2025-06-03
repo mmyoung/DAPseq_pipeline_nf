@@ -9,11 +9,15 @@ Trying to modulize the workflow of DAP analysis to save repetitive work.
 2. Motif analysis (MEME Suite)
 3. Peak annotation (HOMER)
 4. FRIP score calculation
+5. Produce final report
 
 ## Test the workflow
 ```
 git clone git@github.com:mmyoung/DAPseq_pipeline_nf.git
-nextflow run /path/to/DAPseq_pipeline_nf -params-file params.yml ## yml file saving all parameters, refer to the file in ./test folder for format
+nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file params.yml  ## yml file saving all parameters, refer to the file in ./test folder for format
+
+## if the run was terminated in the middle without specific error, try:
+nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file params.yml -resume
 ```
 
 ## Parameters
@@ -26,8 +30,9 @@ nextflow run /path/to/DAPseq_pipeline_nf -params-file params.yml ## yml file sav
 --gsize The size of analyzing genome.
 --bowtie_idx The bowtei2 index directory. ## built with bowtie2-build command
 --prime5_trim_len How many bases to trim for the 5' of reads.
---prime3_trim_len How many bases to trim for the 3' of reads.
---gsize The size of analyzing genome.
+--prime3_trim_len How many bases to trim for the 3' of reads. # parameter for trim_galore
+--gsize The size of analyzing genome. ## parameter for MACS2
+--control_samples ## comma separated sample ID that are controls in the peak calling program, those samples won't be used for peak detection, if there are no contral samples, put null
 
 ```
 
@@ -85,14 +90,17 @@ Input,SRR27496337_1.fastq,SRR27496337_2.fastq,0,
 │   │   └── meme.xml
 │   └── IP.peak.fasta
 └── trimm
-    ├── Input_val_1.fq.gz
-    ├── Input_val_2.fq.gz
-    ├── IP_val_1.fq.gz
-    ├── IP_val_2.fq.gz
-    ├── SRR27496336_1.fastq_trimming_report.txt
-    ├── SRR27496336_2.fastq_trimming_report.txt
-    ├── SRR27496337_1.fastq_trimming_report.txt
-    └── SRR27496337_2.fastq_trimming_report.txt
+│   ├── Input_val_1.fq.gz
+│   ├── Input_val_2.fq.gz
+│   ├── IP_val_1.fq.gz
+│   ├── IP_val_2.fq.gz
+│   ├── SRR27496336_1.fastq_trimming_report.txt
+│   ├── SRR27496336_2.fastq_trimming_report.txt
+│   ├── SRR27496337_1.fastq_trimming_report.txt
+│   └── SRR27496337_2.fastq_trimming_report.txt
+└── report
+    ├── read_peak.num.summary
+    └── report.html
     
 ```
 

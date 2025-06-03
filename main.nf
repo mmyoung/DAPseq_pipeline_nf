@@ -75,7 +75,7 @@ process SAMPLE_REPORTING{
         """
             echo -e "Sample_ID\\tRaw_reads\\tMapped_reads\\tMapping_ratio\\tPeak_number\\tMin5fold_peaks\\tMax_peak_foldchange\\tPeak_reads\\tFRiP_score" > read_peak.num.summary
             
-            sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _; do
+            sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [ -n "\$ID" ]; do
                 [ -z "\$ID" ] && continue
                 
                 # Check if peak file exists
@@ -131,7 +131,10 @@ workflow {
 
         // FIXED CONTROL DETECTION - Simple and reliable
 
-    def known_controls = params.control_samples.split(',').collect { it.trim() }
+    def known_controls = params.control_samples ? 
+    params.control_samples.split(',').collect { it.trim() } : 
+    []
+
     log.info "Using known control samples: ${known_controls}"
 
     // Simple branching - no complex channel operations
@@ -201,10 +204,14 @@ workflow {
     bowtie_bam_for_frip = BOWTIE2MAP.out.bam
         .map { meta, bam -> [meta.id, bam] }
 
+    MACS2_CALLPEAK.out.peak.count().view { "=== TOTAL PEAK FILES: $it ===" }
+    bowtie_bam_for_frip.count().view { "=== TOTAL BAM FILES: $it ===" }
+
     // Now they both have [sample_id, file] structure
-    CAL_FRIP(
-        MACS2_CALLPEAK.out.peak.join(bowtie_bam_for_frip, by: 0)
-    )
+    cal_frip_input = MACS2_CALLPEAK.out.peak.join(bowtie_bam_for_frip, by: 0)
+    cal_frip_input.out.txt.count().view { "=== TOTAL FRIP SCORE FILES: $it ===" }
+    CAL_FRIP( cal_frip_input )
+
     CAL_FRIP.out.txt.count().set { sample_count }
 
     // annotate peak distribution using HOMER
