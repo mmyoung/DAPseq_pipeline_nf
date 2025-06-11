@@ -1,52 +1,98 @@
-name: DAPseq_env
+name: DAPseq_env_test
 channels:
   - bioconda/label/cf201901
   - conda-forge/label/gcc7
-  - conda-forge
   - bioconda
+  - conda-forge
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=2_gnu
+  - _r-mutex=1.0.0=anacondar_1
+  - _sysroot_linux-64_curr_repodata_hack=3=haa98f57_10
+  - binutils_impl_linux-64=2.40=hf600244_0
+  - bwidget=1.9.16=h9eba36c_0
   - bzip2=1.0.8=hd590300_5
-  - ca-certificates=2024.8.30=hbcca054_0
+  - c-ares=1.19.1=h5eee18b_0
+  - ca-certificates=2025.4.26=hbd8a1cb_0
+  - cairo=1.18.0=h3faef2a_0
+  - certifi=2025.4.26=py312h06a4308_0
+  - curl=8.12.1=h251f7ec_0
   - entrez-direct=22.4=he881be0_0
   - expat=2.6.3=h5888daf_0
+  - font-ttf-dejavu-sans-mono=2.37=hd3eb1b0_0
+  - font-ttf-inconsolata=2.001=hcb22688_0
+  - font-ttf-source-code-pro=2.030=hd3eb1b0_0
+  - font-ttf-ubuntu=0.83=h8b1ccd4_0
+  - fontconfig=2.14.2=h14ed4e7_0
+  - fonts-anaconda=1=h8fa9717_0
+  - fonts-conda-ecosystem=1=hd3eb1b0_0
+  - freetype=2.13.3=h4a9f257_0
+  - fribidi=1.0.10=h7b6447c_0
+  - gcc_impl_linux-64=11.2.0=h1234567_1
   - gettext=0.21.1=h27087fc_0
+  - gfortran_impl_linux-64=11.2.0=h7a446d4_16
   - ghostscript=10.04.0=h5888daf_0
+  - graphite2=1.3.14=h295c915_1
+  - gxx_impl_linux-64=11.2.0=h1234567_1
+  - harfbuzz=9.0.0=hfac3d4d_0
   - hmmer=3.4=hdbdd923_2
   - homer=4.11=pl5262h4ac6f70_9
   - icu=73.2=h59595ed_0
+  - kernel-headers_linux-64=3.10.0=h57e8cba_10
+  - krb5=1.20.1=h143b758_1
   - ld_impl_linux-64=2.40=h41732ed_0
+  - lerc=4.0.0=h6a678d5_0
+  - libblas=3.9.0=31_h59b9bed_openblas
+  - libcurl=8.12.1=hc9e6f67_0
+  - libdeflate=1.20=hd590300_0
+  - libedit=3.1.20230828=h5eee18b_0
+  - libev=4.33=h7f8727e_1
   - libexpat=2.6.3=h5888daf_0
   - libffi=3.4.2=h7f98852_5
   - libgcc=14.1.0=h77fa898_1
+  - libgcc-devel_linux-64=11.2.0=h1234567_1
   - libgcc-ng=14.1.0=h69a702a_1
   - libgfortran-ng=13.2.0=h69a702a_5
   - libgfortran5=13.2.0=ha4646dd_5
+  - libglib=2.80.2=hf974151_0
   - libgomp=14.1.0=h77fa898_1
   - libiconv=1.17=hd590300_2
   - libidn2=2.3.7=hd590300_0
+  - libjpeg-turbo=3.0.3=h5eee18b_0
+  - liblapack=3.9.0=31_h7ac8fdf_openblas
+  - libnghttp2=1.57.0=h2d74bed_0
   - libnsl=2.0.1=hd590300_0
+  - libopenblas=0.3.29=ha39b09d_0
+  - libpng=1.6.43=h2797004_0
   - libsqlite=3.44.2=h2797004_0
+  - libssh2=1.11.1=h251f7ec_0
   - libstdcxx=14.1.0=hc0a3c3a_1
+  - libstdcxx-devel_linux-64=11.2.0=h1234567_1
   - libstdcxx-ng=13.2.0=h7e041cc_4
+  - libtiff=4.6.0=h1dd3fc0_3
   - libunistring=0.9.10=h7f98852_0
   - libuuid=2.38.1=h0b41bf4_0
   - libuv=1.48.0=hd590300_0
+  - libwebp-base=1.3.2=h5eee18b_1
+  - libxcb=1.15=h7f8727e_0
   - libxcrypt=4.4.36=hd590300_1
   - libxml2=2.12.7=hc051c1a_1
   - libxslt=1.1.39=h76b75d6_0
   - libzlib=1.2.13=hd590300_5
+  - make=4.2.1=h1bed415_1
   - meme=5.5.7=pl5321hca22f42_0
   - mpi=1.0=openmpi
   - ncurses=6.4=h59595ed_2
   - nodejs=20.12.2=hb753e55_0
   - nseg=1.0.1=h031d066_4
-  - openjdk=11.0.1=h14c3975_1014
+  - openjdk=11.0.1=h516909a_1016
   - openmpi=4.1.6=hc5af2df_101
-  - openssl=3.3.2=hb9d3cd8_0
+  - openssl=3.5.0=h7b32b05_1
+  - pandoc=3.7.0.1=ha770c72_0
+  - pango=1.54.0=h4c5309f_1
   - pcre=8.45=h9c3ff4c_0
+  - pcre2=10.43=hcad00b1_0
   - perl=5.32.1=7_hd590300_perl5
   - perl-app-cpanminus=1.7047=pl5321hd8ed1ab_0
   - perl-archive-tar=2.40=pl5321hdfd78af_0
@@ -119,22 +165,39 @@ dependencies:
   - perl-yaml=1.30=pl5321hdfd78af_0
   - picard=2.18.23=0
   - pip=23.3.2=pyhd8ed1ab_0
+  - pixman=0.46.0=h29eaf8c_0
   - python=3.12.1=hab00c5b_1_cpython
+  - r-base=4.4.0=h019f4a6_1
   - readline=8.2=h8228510_1
   - recon=1.08=h031d066_7
   - repeatmasker=4.0.6=6
   - repeatmodeler=1.0.8=0
   - repeatscout=1.0.6=hec16e2b_3
   - rmblast=2.14.1=h4565617_0
+  - sed=4.8=h7b6447c_0
+  - sysroot_linux-64=2.17=h57e8cba_10
   - tk=8.6.13=noxft_h4845f30_101
+  - tktable=2.10=h3d55465_1
   - trf=4.09.1=h031d066_5
   - tzdata=2024a=h0c530f3_0
   - unzip=6.0=h7f98852_3
   - wget=1.20.3=ha35d2d1_1
   - wheel=0.42.0=pyhd8ed1ab_0
+  - xorg-kbproto=1.0.7=h5eee18b_1003
+  - xorg-libice=1.1.2=h9b100fa_0
+  - xorg-libsm=1.2.6=he73a12e_0
+  - xorg-libx11=1.8.9=h8ee46fc_0
+  - xorg-libxext=1.3.4=h0b41bf4_2
+  - xorg-libxrender=0.9.11=hd590300_0
+  - xorg-libxt=1.3.0=hd590300_1
+  - xorg-renderproto=0.11.1=hb9d3cd8_1003
+  - xorg-xextproto=7.3.0=h5eee18b_1004
+  - xorg-xorgproto=2024.1=h5eee18b_0
+  - xorg-xproto=7.0.31=h5eee18b_1008
   - xz=5.2.6=h166bdaf_0
   - yaml=0.2.5=h7f98852_2
   - zlib=1.2.13=hd590300_5
+  - zstd=1.5.6=ha6fb4c9_0
   - pip:
       - alabaster==1.0.0
       - anyio==4.9.0
@@ -147,12 +210,12 @@ dependencies:
       - babel==2.17.0
       - beautifulsoup4==4.13.3
       - bleach==6.2.0
-      - certifi==2025.1.31
       - cffi==1.17.1
       - charset-normalizer==3.4.1
       - comm==0.2.2
       - contourpy==1.3.0
       - cycler==0.12.1
+      - cykhash==2.0.1
       - debugpy==1.8.13
       - decorator==5.2.1
       - deeptools==3.5.5
@@ -164,6 +227,7 @@ dependencies:
       - fonttools==4.53.1
       - fqdn==1.5.1
       - h11==0.14.0
+      - hmmlearn==0.3.3
       - httpcore==1.0.7
       - httpx==0.28.1
       - idna==3.10
@@ -175,6 +239,7 @@ dependencies:
       - isoduration==20.11.0
       - jedi==0.19.2
       - jinja2==3.1.6
+      - joblib==1.5.1
       - json5==0.10.0
       - jsonpointer==3.0.0
       - jsonschema==4.23.0
@@ -192,6 +257,7 @@ dependencies:
       - jupyterlab-server==2.27.3
       - jupyterlab-widgets==3.0.13
       - kiwisolver==1.4.7
+      - macs3==3.0.3
       - markupsafe==3.0.2
       - matplotlib==3.9.2
       - matplotlib-inline==0.1.7
@@ -232,6 +298,7 @@ dependencies:
       - rfc3339-validator==0.1.4
       - rfc3986-validator==0.1.1
       - rpds-py==0.24.0
+      - scikit-learn==1.6.1
       - scipy==1.14.1
       - send2trash==1.8.3
       - setuptools==78.1.0
@@ -250,6 +317,7 @@ dependencies:
       - tabulate==0.9.0
       - tenacity==9.0.0
       - terminado==0.18.1
+      - threadpoolctl==3.6.0
       - tinycss2==1.4.0
       - tornado==6.4.2
       - traitlets==5.14.3
@@ -262,4 +330,4 @@ dependencies:
       - webencodings==0.5.1
       - websocket-client==1.8.0
       - widgetsnbextension==4.0.13
-prefix: /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env
+prefix: /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env_test

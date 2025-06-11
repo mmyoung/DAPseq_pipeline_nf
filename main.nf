@@ -67,7 +67,7 @@ process SAMPLE_REPORTING{
 
     output:
         path("read_peak.num.summary")
-        path("report.html")
+        path("report.html"), optional: true
 
     script:
         def reportPath = "${projectDir}/bin/report.Rmd"
@@ -209,7 +209,6 @@ workflow {
 
     // Now they both have [sample_id, file] structure
     cal_frip_input = MACS2_CALLPEAK.out.peak.join(bowtie_bam_for_frip, by: 0)
-    cal_frip_input.out.txt.count().view { "=== TOTAL FRIP SCORE FILES: $it ===" }
     CAL_FRIP( cal_frip_input )
 
     CAL_FRIP.out.txt.count().set { sample_count }
