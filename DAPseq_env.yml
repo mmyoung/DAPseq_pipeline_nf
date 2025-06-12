@@ -1,4 +1,4 @@
-name: DAPseq_env_test
+name: DAPseq_env
 channels:
   - bioconda/label/cf201901
   - conda-forge/label/gcc7
@@ -10,16 +10,22 @@ dependencies:
   - _openmp_mutex=4.5=2_gnu
   - _r-mutex=1.0.0=anacondar_1
   - _sysroot_linux-64_curr_repodata_hack=3=haa98f57_10
+  - bedtools=2.31.1=hf5e1c6e_2
   - binutils_impl_linux-64=2.40=hf600244_0
+  - bowtie2=2.5.4=h7071971_4
   - bwidget=1.9.16=h9eba36c_0
   - bzip2=1.0.8=hd590300_5
   - c-ares=1.19.1=h5eee18b_0
   - ca-certificates=2025.4.26=hbd8a1cb_0
   - cairo=1.18.0=h3faef2a_0
-  - certifi=2025.4.26=py312h06a4308_0
+  - certifi=2025.4.26=pyhd8ed1ab_0
+  - cffi=1.17.1=py312h06ac9bb_0
   - curl=8.12.1=h251f7ec_0
+  - cutadapt=5.1=py312h0fa9677_0
+  - dnaio=1.2.2=py312hf67a6ed_0
   - entrez-direct=22.4=he881be0_0
   - expat=2.6.3=h5888daf_0
+  - fastqc=0.12.1=hdfd78af_0
   - font-ttf-dejavu-sans-mono=2.37=hd3eb1b0_0
   - font-ttf-inconsolata=2.001=hcb22688_0
   - font-ttf-source-code-pro=2.030=hd3eb1b0_0
@@ -37,8 +43,9 @@ dependencies:
   - gxx_impl_linux-64=11.2.0=h1234567_1
   - harfbuzz=9.0.0=hfac3d4d_0
   - hmmer=3.4=hdbdd923_2
-  - homer=4.11=pl5262h4ac6f70_9
+  - homer=5.1=pl5262h9948957_0
   - icu=73.2=h59595ed_0
+  - isa-l=2.31.1=hb9d3cd8_1
   - kernel-headers_linux-64=3.10.0=h57e8cba_10
   - krb5=1.20.1=h143b758_1
   - ld_impl_linux-64=2.40=h41732ed_0
@@ -91,6 +98,7 @@ dependencies:
   - openssl=3.5.0=h7b32b05_1
   - pandoc=3.7.0.1=ha770c72_0
   - pango=1.54.0=h4c5309f_1
+  - pbzip2=1.1.13=h1fcc475_2
   - pcre=8.45=h9c3ff4c_0
   - pcre2=10.43=hcad00b1_0
   - perl=5.32.1=7_hd590300_perl5
@@ -164,9 +172,14 @@ dependencies:
   - perl-xml-simple=2.25=pl5321hdfd78af_2
   - perl-yaml=1.30=pl5321hdfd78af_0
   - picard=2.18.23=0
+  - pigz=2.8=h2797004_0
   - pip=23.3.2=pyhd8ed1ab_0
   - pixman=0.46.0=h29eaf8c_0
+  - pycparser=2.22=pyh29332c3_1
   - python=3.12.1=hab00c5b_1_cpython
+  - python-isal=1.7.2=py312h66e93f0_0
+  - python-zlib-ng=0.5.1=py312h27ca174_0
+  - python_abi=3.12=7_cp312
   - r-base=4.4.0=h019f4a6_1
   - readline=8.2=h8228510_1
   - recon=1.08=h031d066_7
@@ -179,10 +192,12 @@ dependencies:
   - tk=8.6.13=noxft_h4845f30_101
   - tktable=2.10=h3d55465_1
   - trf=4.09.1=h031d066_5
+  - trim-galore=0.6.10=hdfd78af_1
   - tzdata=2024a=h0c530f3_0
   - unzip=6.0=h7f98852_3
   - wget=1.20.3=ha35d2d1_1
   - wheel=0.42.0=pyhd8ed1ab_0
+  - xopen=2.0.2=pyh707e725_2
   - xorg-kbproto=1.0.7=h5eee18b_1003
   - xorg-libice=1.1.2=h9b100fa_0
   - xorg-libsm=1.2.6=he73a12e_0
@@ -197,6 +212,8 @@ dependencies:
   - xz=5.2.6=h166bdaf_0
   - yaml=0.2.5=h7f98852_2
   - zlib=1.2.13=hd590300_5
+  - zlib-ng=2.2.4=h7955e40_0
+  - zstandard=0.23.0=py312h66e93f0_2
   - zstd=1.5.6=ha6fb4c9_0
   - pip:
       - alabaster==1.0.0
@@ -210,7 +227,6 @@ dependencies:
       - babel==2.17.0
       - beautifulsoup4==4.13.3
       - bleach==6.2.0
-      - cffi==1.17.1
       - charset-normalizer==3.4.1
       - comm==0.2.2
       - contourpy==1.3.0
@@ -285,7 +301,6 @@ dependencies:
       - pure-eval==0.2.3
       - py2bit==0.3.0
       - pybigwig==0.3.23
-      - pycparser==2.22
       - pygments==2.19.1
       - pyparsing==3.1.4
       - pysam==0.22.1
@@ -330,4 +345,4 @@ dependencies:
       - webencodings==0.5.1
       - websocket-client==1.8.0
       - widgetsnbextension==4.0.13
-prefix: /project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env_test
+prefix: /project/gzy8899/lyang/miniconda3/envs/DAPseq_env

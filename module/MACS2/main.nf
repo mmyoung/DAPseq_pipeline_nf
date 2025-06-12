@@ -5,7 +5,7 @@ process MACS2_CALLPEAK {
     label 'Peak_calling_with_MACS3'
     publishDir "${params.output_dir}/macs3_output", mode: 'copy'
 
-    conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    // conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
 
     input:
     

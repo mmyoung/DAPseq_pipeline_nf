@@ -7,3 +7,4 @@ prime5_trim_len : 10
 prime3_trim_len : 10
 bowtie_idx : "/project/gzy8899/references/Arabidopsis_thaliana/bowtie2_idx/TAIR10"
 gsize : 133725193
+control_samples : null

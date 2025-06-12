@@ -22,7 +22,7 @@ process BOWTIE2MAP {
 
     """
     module load samtools/1.13
-    /project/zhuzhuzhang/lyang/software/bowtie2-2.4.2-sra-linux-x86_64/bowtie2 \\
+    bowtie2 \\
     -x ${params.bowtie_idx} \\
     $reads_args \\
     --threads $task.cpus \\

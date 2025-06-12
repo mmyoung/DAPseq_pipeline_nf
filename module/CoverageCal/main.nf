@@ -1,6 +1,6 @@
 process COVERAGE {
 
-    conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    // conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
     tag "Calculate the reads coverage in each base ... "
     publishDir "${params.output_dir}/coverage_out", mode: 'copy'
 

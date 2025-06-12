@@ -3,7 +3,7 @@ process HOMER_ANNOTATEPEAKS {
     label 'Peak_annotation'
     publishDir "${params.output_dir}/homer_annotation", mode: 'copy'
 
-    conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    // conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
 
     input:
     tuple val(sample_id), path(peak, stageAs: 'peaks_homer.narrowPeak')

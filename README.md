@@ -8,12 +8,22 @@ Trying to modulize the workflow of DAP analysis to save repetitive work.
 1. Peak calling (MACS3)
 2. Motif analysis (MEME Suite)
 3. Peak annotation (HOMER)
-4. FRIP score calculation
-5. Produce final report
+4. FRIP score calculation (shell)
+5. Produce final report (Rmarkdown)
+
+## Prerequisite
+```
+nextflow program
+conda environment: DAPseq_env (trim_galore and bedtools and bowtie2 and MACS3 and HOMER and MEME suite installed)
+R packages: dplyr, DT, kableExtra, base64enc
+Indexed genome
+
+```
 
 ## Test the workflow
 ```
 git clone git@github.com:mmyoung/DAPseq_pipeline_nf.git
+conda activate DAPseq_env
 nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file params.yml  ## yml file saving all parameters, refer to the file in ./test folder for format
 
 ## if the run was terminated in the middle without specific error, try:
@@ -36,14 +46,9 @@ nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file params.yml -
 
 ```
 
-## Requirements
-```
-conda environment: DAPseq_env (MACS3 and HOMER and MEME suite installed)
-Indexed genome
-
-```
 **Caveats**:
 * need to go through the scripts to make sure the path to softwares are executable for current user.
+* pay attention to the path to cutadapt tool which is required to execute trim_galore and installation of it isn't compatibale with the DAPseq_env environment
 
 ## Input, example
 1. fq_sheet.csv
@@ -104,4 +109,17 @@ Input,SRR27496337_1.fastq,SRR27496337_2.fastq,0,
     
 ```
 
+## Report explanation
+```
+sample: sample names
+raw reads pairs: total raw read (pairs for pair-end sequencing)
+mapped reads: total reads that are mapped to genome
+mapping ratio: % of clean reads that are mapped to genome
+peak#: total peak number output from MACS3
+min5fold peak#: number of peaks that have peak socre >5 in .narrowPeak output from MACS3
+max peak score: the highest peak score in .narrowPeak file
+peak reads#: totol number of reads that falls into peaks
+FRIP_score: total percentage of reads that falls into peaks
+motif: output logo from meme
+```
 

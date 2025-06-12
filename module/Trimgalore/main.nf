@@ -24,7 +24,7 @@ process TRIMGALORE {
     // print"${meta.single_end}"
     if (meta.single_end) {
         """
-        /project/zhuzhuzhang/lyang/software/TrimGalore-0.6.10/trim_galore \\
+        trim_galore \\
         --path_to_cutadapt /project/zhuzhuzhang/lyang/software/miniconda3/envs/cutadaptenv/bin/cutadapt \\
         --cores $cores \\
         --gzip \\
@@ -34,7 +34,7 @@ process TRIMGALORE {
         """
     } else {
         """
-        /project/zhuzhuzhang/lyang/software/TrimGalore-0.6.10/trim_galore \\
+        trim_galore \\
         --path_to_cutadapt /project/zhuzhuzhang/lyang/software/miniconda3/envs/cutadaptenv/bin/cutadapt \\
             --cores $cores \\
             --paired \\

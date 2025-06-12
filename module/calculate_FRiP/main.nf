@@ -1,6 +1,6 @@
 process CAL_FRIP {
 
-    conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    // conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
 
     tag "FRiP calculation"
     label 'FRiP'

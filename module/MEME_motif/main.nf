@@ -3,7 +3,7 @@ process MEME_MOTIF {
     label 'motif_analysis'
     publishDir "${params.output_dir}/meme_motif", mode: 'copy'
 
-    conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
+    // conda "/project/zhuzhuzhang/lyang/software/miniconda3/envs/DAPseq_env"
 
     input:
     tuple val(sample_id), path(peak, stageAs: 'peaks_meme.narrowPeak')

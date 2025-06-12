@@ -16,7 +16,7 @@ process FASTQC {
         echo "FastQC for single-end data..."
         [ ! -f  ${prefix}.fastq.gz ] && ln -s $reads ${prefix}.fastq.gz
         mkdir ${prefix}
-        /project/zhuzhuzhang/lyang/software/FastQC/fastqc -o ${prefix} --threads $task.cpus ${prefix}.fastq.gz
+        fastqc -o ${prefix} --threads $task.cpus ${prefix}.fastq.gz
         """
     } 
     else {
@@ -25,7 +25,7 @@ process FASTQC {
         [ ! -f  ${prefix}_1.fastq.gz ] && ln -s ${reads[0]} ${prefix}_1.fastq.gz
         [ ! -f  ${prefix}_2.fastq.gz ] && ln -s ${reads[1]} ${prefix}_2.fastq.gz
         mkdir ${prefix}
-        /project/zhuzhuzhang/lyang/software/FastQC/fastqc -o ${prefix} --threads $task.cpus ${prefix}_1.fastq.gz ${prefix}_2.fastq.gz
+        fastqc -o ${prefix} --threads $task.cpus ${prefix}_1.fastq.gz ${prefix}_2.fastq.gz
         """
     }
 }
