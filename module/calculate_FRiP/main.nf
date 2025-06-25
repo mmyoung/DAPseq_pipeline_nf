@@ -30,8 +30,10 @@ process CAL_FRIP {
         # Calculate the FRiP score
         score=\$(awk "BEGIN {print \$peak_read / \$total_read}")
 
+        mapped_pairs=\$(samtools view ${bam} |cut -f 1|sort| uniq|wc -l)
+
         # Output results to a text file
-        printf "%s\\t%d\\t%d\\t%.4f\\n" "${meta}" \$peak_read \$total_read \$score > ${meta}_FRiP_score.txt
+        printf "%s\\t%d\\t%d\\t%.4f\\t%d\\n" "${meta}" \$peak_read \$total_read \$score \$mapped_pairs > ${meta}_FRiP_score.txt
 
     fi
     """

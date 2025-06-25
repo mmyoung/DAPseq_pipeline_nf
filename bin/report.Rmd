@@ -17,7 +17,7 @@ library(base64enc)
 
 # Load the data
 sample_data <- read.table(params$summary_table,sep="\t",header=T)
-colnames(sample_data) <- c("sample","raw read pairs#","mapped reads#","mapping ratio%","peak#","min5fold peak#","max peak score","peak reads#","FRiP_score")
+colnames(sample_data) <- c("sample","raw read pairs#","clean read pairs#","mapping ratio%","unique mapped pairs#","peak#","min5fold peak#","max peak score","peak reads#","FRiP_score")
 
 
 # Define the image directory
@@ -29,6 +29,8 @@ sample_data <- sample_data %>%
   mutate(Image_Path = paste0(image_dir, "/", sample, "_meme/logo1.png")) %>%
   mutate(FRiP_score = round(100* FRiP_score,2))
 
+write.table(sample_data,file="motif_added_sample.txt",sep="\t",quote=F)
+
 sample_data$motif <- sapply(sample_data$Image_Path, function(img) {
   if (file.exists(img)) {
     encoded <- base64encode(img)
@@ -39,7 +41,9 @@ sample_data$motif <- sapply(sample_data$Image_Path, function(img) {
   }
 })
 
-sample_data$`mapped reads#` <- format(as.numeric(sample_data$`mapped reads#`),big.mark=",")
+sample_data$`raw read pairs#` <- format(as.numeric(sample_data$`raw read pairs#`),big.mark=",")
+sample_data$`clean read pairs#` <- format(as.numeric(sample_data$`clean read pairs#`),big.mark=",")
+sample_data$`unique mapped pairs#` <- format(as.numeric(sample_data$`unique mapped pairs#`),big.mark=",")
 sample_data$`peak#` <- format(as.numeric(sample_data$`peak#`),big.mark=",")
 sample_data$`min5fold peak#` <- format(as.numeric(sample_data$`min5fold peak#`),big.mark=",")
 

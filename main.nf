@@ -73,7 +73,7 @@ process SAMPLE_REPORTING{
         def reportPath = "${projectDir}/bin/report.Rmd"
 
         """
-            echo -e "Sample_ID\\tRaw_reads\\tMapped_reads\\tMapping_ratio\\tPeak_number\\tMin5fold_peaks\\tMax_peak_foldchange\\tPeak_reads\\tFRiP_score" > read_peak.num.summary
+            echo -e "Sample_ID\\tRaw_reads\\tClean_reads\\tMapping_ratio\\tMapped_reads\\tPeak_number\\tMin5fold_peaks\\tMax_peak_foldchange\\tPeak_reads\\tFRiP_score" > read_peak.num.summary
             
             sed "1d" ${sample_sheet} | while IFS=',' read ID fq1 _ _ _ || [ -n "\$ID" ]; do
                 [ -z "\$ID" ] && continue
@@ -85,16 +85,18 @@ process SAMPLE_REPORTING{
                 if [ -f "\$peak_file" ] && [ -f "\$frip_file" ]; then
                     
                     raw_num=\$(cat ${output_dir}/trimm/\$fq1"_trimming_report.txt" | grep "Total reads processed:" | sed 's/ //g' | cut -d ":" -f 2 || echo "NA")
+                    clean_num=\$(cat ${output_dir}/trimm/\$fq1"_trimming_report.txt" | grep "Reads written (passing filters):" | sed 's/(/:/g' |sed 's/ //g' | cut -d ":" -f 3 || echo "NA")
+
                     peak_num=\$(cat "\$peak_file" | wc -l)
                     min5fold_peak_num=\$(awk '\$7>5' "\$peak_file" | wc -l)
                     max_peak_foldch=\$(awk '\$7>max{max=\$7}END{print max}' "\$peak_file")
                     mapping_ratio=\$(cat ${output_dir}/alignment/\$ID".bowtie2.log" | grep "overall alignment rate" | sed 's/overall alignment rate//g' || echo "NA")
                     
-                    mapped_reads=\$(cut -f 3 "\$frip_file")
+                    mapped_reads=\$(cut -f 5 "\$frip_file")
                     peak_reads=\$(cut -f 2 "\$frip_file")
                     FRiP_score=\$(cut -f 4 "\$frip_file")
                     
-                    printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n" "\$ID" "\$raw_num" "\$mapped_reads" "\$mapping_ratio" "\$peak_num" "\$min5fold_peak_num" "\$max_peak_foldch" "\$peak_reads" "\$FRiP_score"
+                    printf "%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\t%s\\n" "\$ID" "\$raw_num"  "\$clean_num" "\$mapping_ratio" "\$mapped_reads"  "\$peak_num" "\$min5fold_peak_num" "\$max_peak_foldch" "\$peak_reads" "\$FRiP_score"
                 fi
             done >> read_peak.num.summary
 
@@ -103,6 +105,7 @@ process SAMPLE_REPORTING{
 
             Rscript -e "rmarkdown::render(input = '${reportPath}', output_file='report.html', params=list(summary_table='${params.output_dir}/report/read_peak.num.summary',parent_path='${output_dir}'))"
 
+            mv ${projectDir}/bin/motif_added_sample.txt ${params.output_dir}/report/
             mv ${projectDir}/bin/report.html ${params.output_dir}/report/
         """
 }
