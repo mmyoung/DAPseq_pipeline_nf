@@ -39,8 +39,6 @@ nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file params.yml -
 --fq_dir  The folder where the raw .fastq files are.
 --gsize The size of analyzing genome.
 --bowtie_idx The bowtei2 index directory. ## built with bowtie2-build command
---prime5_trim_len How many bases to trim for the 5' of reads.
---prime3_trim_len How many bases to trim for the 3' of reads. # parameter for trim_galore
 --gsize The size of analyzing genome. ## parameter for MACS2
 --control_samples ## comma separated sample ID that are controls in the peak calling program, those samples won't be used for peak detection, if there are no contral samples, put null
 
@@ -112,11 +110,12 @@ Input,SRR27496337_1.fastq,SRR27496337_2.fastq,0,
 ## Report explanation
 ```
 sample: sample names
-raw reads pairs: total raw read (pairs for pair-end sequencing)
-mapped reads: total reads that are mapped to genome
+raw reads pairs#: total raw read (pairs for pair-end sequencing)
+clean read pairs#: total read pairs passing trim_galore filters (-q 20, --length 20)
 mapping ratio: % of clean reads that are mapped to genome
+unique mapped pairs#: total reads number that are uniquely mapped to genome (filtered with samtools view -q 20)
 peak#: total peak number output from MACS3
-min5fold peak#: number of peaks that have peak socre >5 in .narrowPeak output from MACS3
+min5fold peak#: number of peaks that have peak score >5 in .narrowPeak output from MACS3
 max peak score: the highest peak score in .narrowPeak file
 peak reads#: totol number of reads that falls into peaks
 FRIP_score: total percentage of reads that falls into peaks

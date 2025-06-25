@@ -3,8 +3,6 @@ fq_dir : "/project/gzy8899/lyang/20250307_DAP-RNA_pooled_sequencing/raw_data"
 output_dir : "${projectDir}/test_out"
 fasta : "/project/gzy8899/references/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.dna.toplevel.fa"
 gtf : "/project/gzy8899/references/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.57.gtf"
-prime5_trim_len : 10
-prime3_trim_len : 10
 bowtie_idx : "/project/gzy8899/references/Arabidopsis_thaliana/bowtie2_idx/TAIR10"
 gsize : 133725193
 control_samples : null
