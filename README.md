@@ -31,6 +31,8 @@ nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file params.yml -
 ```
 
 ## Parameters
+
+Parameters can be passed to the pipeline in the command line or be put in a .yml file and passed to the pipeline in a whole (-params-file params.yml)
 ```
 --fq_sheet A tab-delimited file storing the samples information, with five columns: sample,fq1,fq2,single_end,control
 --fasta    Genome fasta file for the analyzing species.
@@ -48,8 +50,8 @@ nextflow run /project/gzy8899/lyang/DAPseq_pipeline_nf -params-file params.yml -
 * need to go through the scripts to make sure the path to softwares are executable for current user.
 * pay attention to the path to cutadapt tool which is required to execute trim_galore and installation of it isn't compatibale with the DAPseq_env environment
 
-## Input, example
-1. fq_sheet.csv
+## example of sample sheet passed to --fq_sheet
+fq_sheet.csv (comma separated meta data)
 ```
 sample,fq1,fq2,single_end,control
 IP,SRR27496336_1.fastq,SRR27496336_2.fastq,0,Input
@@ -62,6 +64,8 @@ single_end: indicate whether the data is from single-end sequencing (1: single-e
 control; the corresponding control sample name/id for the DAP library (empty if there is no control)
 
 ## Results 
+The intermediate output from all procedures are saved in the output directory the user defined, the structure looks like the following:
+
 ```
 ├── alignment
 │   ├── Input.bowtie2.log
@@ -111,6 +115,7 @@ control; the corresponding control sample name/id for the DAP library (empty if 
     └── report.html
     
 ```
+The report.html output is the one to check with some important statistics report about the data.
 
 ## Report explanation
 ```
