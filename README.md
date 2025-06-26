@@ -55,6 +55,11 @@ sample,fq1,fq2,single_end,control
 IP,SRR27496336_1.fastq,SRR27496336_2.fastq,0,Input
 Input,SRR27496337_1.fastq,SRR27496337_2.fastq,0,
 ```
+sample: sample name or id, need to be unique
+fq1: read1 fastq name for pair-end sequencing (the only fastq file name for single-end sequencing)
+fq2: read2 fastq name for pair-end sequencing (empty for single-end sequencing)
+single_end: indicate whether the data is from single-end sequencing (1: single-end; 0: pair-end)
+control; the corresponding control sample name/id for the DAP library (empty if there is no control)
 
 ## Results 
 ```
