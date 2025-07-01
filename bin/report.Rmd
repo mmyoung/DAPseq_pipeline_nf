@@ -41,8 +41,8 @@ sample_data$motif <- sapply(sample_data$Image_Path, function(img) {
   }
 })
 
-sample_data$`raw read pairs#` <- format(as.numeric(sample_data$`raw read pairs#`),big.mark=",")
-sample_data$`clean read pairs#` <- format(as.numeric(sample_data$`clean read pairs#`),big.mark=",")
+#sample_data$`raw read pairs#` <- format(as.numeric(sample_data$`raw read pairs#`),big.mark=",")
+#sample_data$`clean read pairs#` <- format(as.numeric(sample_data$`clean read pairs#`),big.mark=",")
 sample_data$`unique mapped pairs#` <- format(as.numeric(sample_data$`unique mapped pairs#`),big.mark=",")
 sample_data$`peak#` <- format(as.numeric(sample_data$`peak#`),big.mark=",")
 sample_data$`min5fold peak#` <- format(as.numeric(sample_data$`min5fold peak#`),big.mark=",")

@@ -15,8 +15,6 @@ if (params.help) {
     log.info ''
     log.info 'Options:'
     log.info '	--help	Show this message and exit.'
-    log.info '	--prime5_trim_len    Trim the first ? number of bases in 5-end of each read.'
-    log.info '	--prime3_trim_len    Trim the first ? number of bases in 3-end of each read.'
     log.info '  --bowtie_idx bowtie_idx    bowtie index prefix for analysis.'
     log.info '  --data_dir raw_data    The folder where the raw .fq files are.'
     log.info '	--fq_sheet fq_sheet    A tab-delimited file storing the samples information, with three columns: sample_id,fq1,fq2,single_end,control.'
