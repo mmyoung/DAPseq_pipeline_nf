@@ -2,7 +2,7 @@ nextflow.enable.dsl=2
 
 //params.help = false
 params.threads = 1
-params.output_dir = './results'
+params.output_dir = "${projectDir}/results"
 
 //print usage
 if (params.help) {
