@@ -43,6 +43,7 @@ include {CAL_FRIP} from "./module/calculate_FRiP"
 process COMPLETION_CHECK {
     input:
         val(count)
+        val(count2)
         val(output_dir)
     
     output:
@@ -219,7 +220,10 @@ workflow {
     MEME_MOTIF(MACS2_CALLPEAK.out.peak, params.fasta)
 
 
-    COMPLETION_CHECK(sample_count, params.output_dir)
+    MEME_MOTIF.out.meme_dir.count().set { sample_count2 }
+
+    COMPLETION_CHECK(sample_count, sample_count2, params.output_dir)
+
     SAMPLE_REPORTING(params.fq_sheet, params.output_dir, COMPLETION_CHECK.out.ready)
 }
 
