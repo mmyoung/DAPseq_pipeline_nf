@@ -6,10 +6,36 @@ Trying to modulize the workflow of DAP analysis to save repetitive work.
 1. Reads trimming (trim_galore)
 2. Clean reads mapping (bowtie2)
 1. Peak calling (MACS3)
-2. Motif analysis (MEME Suite)
-3. Peak annotation (HOMER)
-4. FRIP score calculation (shell)
-5. Produce final report (Rmarkdown)
+   ```
+   macs3 \\
+        callpeak \\
+        --gsize $macs2_gsize \\
+        --format $format \\
+        --name $prefix \\
+        --call-summits \\
+        --keep-dup 1 \\
+        --treatment $ipbam \\
+        $CONTROL_CMD
+   
+   ```
+3. Motif analysis (MEME Suite)
+   Filtering the top 100 strongest (by peak score) peaks for motif finding (summit +-30bp).
+   ```
+   meme ${sample_id}.peak.fasta \\
+        -dna \\
+        -revcomp \\
+        -mod anr \\
+        -nmotifs 2 \\
+        -minw 8 \\
+        -maxw 32 \\
+        -maxsize 10000000 \\
+        -time 1800 \\
+        -o ${sample_id}_meme
+   ```
+5. Peak annotation (HOMER)
+   Assign peak to their closest genes.
+7. FRIP score calculation (shell)
+9. Produce final report (Rmarkdown)
 
 ## Prerequisite
 ```
