@@ -19,6 +19,7 @@ Trying to modulize the workflow of DAP analysis to save repetitive work.
    
    ```
 3. Motif analysis (MEME Suite)
+   
    Filtering the top 100 strongest (by peak score) peaks for motif finding (summit +-30bp).
    ```
    meme ${sample_id}.peak.fasta \\
