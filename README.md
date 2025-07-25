@@ -33,7 +33,9 @@ Trying to modulize the workflow of DAP analysis to save repetitive work.
         -o ${sample_id}_meme
    ```
 5. Peak annotation (HOMER)
+   
    Assign peak to their closest genes.
+   
 7. FRIP score calculation (shell)
 9. Produce final report (Rmarkdown)
 
